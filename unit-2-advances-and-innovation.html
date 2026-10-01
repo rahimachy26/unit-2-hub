@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#16335B">
+<meta name="robots" content="noindex, nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Unit 2 practice">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Unit 2 practice hub</title>
+<style>
+:root{--navy:#16335B;--navy2:#22497D;--amber:#E8A33D;--amb:#96610F;--green:#0B6E4F;--red:#B3261E;
+--ink:#1F2F4D;--head:#16335B;--muted:#5A6472;--line:#D8E2EE;--bg:#F4F7FB;--card:#FFFFFF;--tint:#EEF3FA;
+--goodbg:#E7F4EE;--badbg:#FBEAEA;--ambbg:#FFF6E5;--btn:#16335B;--btnh:#22497D;--art:#16335B;--r:14px;--scale:1;
+--shadow:0 1px 2px rgba(22,51,91,.06),0 3px 10px rgba(22,51,91,.05)}
+[data-theme="cream"]{--bg:#F6EFE1;--card:#FFFDF8;--line:#E4D9C4;--tint:#F2EADB;--ambbg:#FBEFD6}
+[data-theme="dark"]{--bg:#0E1A2B;--card:#16263D;--ink:#E4ECF7;--head:#D3E3F8;--muted:#A6B4C7;--line:#2B3F5E;--tint:#1C3050;
+--goodbg:#123A2D;--badbg:#401E1E;--ambbg:#3A2E14;--btn:#2F5E9C;--btnh:#3A6DB0;--art:#BFD4F2;--green:#63D3A8;--red:#FF8F86;--amb:#F2C879;
+--shadow:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme]){--bg:#0E1A2B;--card:#16263D;--ink:#E4ECF7;--head:#D3E3F8;--muted:#A6B4C7;--line:#2B3F5E;--tint:#1C3050;
+--goodbg:#123A2D;--badbg:#401E1E;--ambbg:#3A2E14;--btn:#2F5E9C;--btnh:#3A6DB0;--art:#BFD4F2;--green:#63D3A8;--red:#FF8F86;--amb:#F2C879;--shadow:none}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html,body{margin:0;padding:0;overflow-x:hidden}
+body{background:var(--bg);color:var(--ink);font-family:Arial,"Liberation Sans",Helvetica,sans-serif;
+font-size:calc(17px * var(--scale));line-height:1.5;-webkit-tap-highlight-color:transparent}
+[data-theme="cream"] body{letter-spacing:.01em;word-spacing:.06em;line-height:1.6}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+[tabindex="-1"]:focus{outline:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.muted{color:var(--muted)} .small{font-size:.86em}
+h2,h3{color:var(--head);line-height:1.25}
+
+/* header: full on the menu, compact while playing */
+.hdr{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;
+padding:calc(18px + env(safe-area-inset-top)) 18px 16px}
+.hdr .kick{color:var(--amber);font-weight:700;font-size:.8em}
+.hdr h1{margin:3px 0 2px;font-size:1.5em;line-height:1.2}
+.hdr .sub{color:#C3D3EA;font-size:.86em}
+.rule{height:4px;background:var(--amber)}
+.hdr.compact{display:flex;align-items:center;gap:10px;padding:calc(8px + env(safe-area-inset-top)) 10px 8px}
+.hdr.compact .t{flex:1;min-width:0;font-weight:700;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hdr.compact .n{font-size:.86em;color:#C3D3EA;white-space:nowrap;padding-right:6px}
+.iconbtn{flex:none;width:46px;height:46px;border-radius:12px;border:0;background:rgba(255,255,255,.14);color:#fff;
+display:inline-flex;align-items:center;justify-content:center}
+.iconbtn.plain{background:var(--tint);color:var(--head)}
+.pbar{height:6px;background:var(--line)} .pbar i{display:block;height:100%;background:var(--amber);transition:width .35s}
+svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+.wrap{max-width:760px;margin:0 auto;padding:16px 16px calc(100px + env(safe-area-inset-bottom))}
+body.playing .wrap{padding-bottom:calc(24px + env(safe-area-inset-bottom))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:var(--shadow)}
+.stack>*+*{margin-top:12px}
+.sec{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:24px 2px 10px}
+.sec h2{margin:0;font-size:1.1em}
+.panel{border-radius:var(--r);padding:14px 16px;background:var(--card);border:1px solid var(--line)}
+.panel.amber{background:var(--ambbg);border-color:transparent;border-left:5px solid var(--amber)}
+.panel h3{margin:0 0 4px;font-size:1em}
+.panel p{margin:.35em 0}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 18px;border-radius:12px;
+border:2px solid var(--btn);background:var(--btn);color:#fff;font-weight:700;text-decoration:none;text-align:center;line-height:1.2}
+.btn:hover{background:var(--btnh);border-color:var(--btnh)}
+.btn.amber{background:var(--amber);border-color:var(--amber);color:#241802}
+.btn.amber:hover{filter:brightness(1.05)}
+.btn.ghost{background:transparent;color:var(--head);border-color:var(--line)}
+.btn.ghost:hover{background:var(--tint)}
+.btn.small{min-height:42px;padding:0 14px;font-size:.9em}
+.btn.block{width:100%}
+.btn[disabled]{opacity:.45;cursor:default}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row>.btn{flex:1 1 150px}
+.link{background:none;border:0;padding:10px 4px;color:var(--head);text-decoration:underline;text-underline-offset:3px;font-weight:700;min-height:44px}
+.dock{position:sticky;bottom:0;padding:14px 0 calc(10px + env(safe-area-inset-bottom));margin-top:8px;
+background:linear-gradient(to top,var(--bg) 72%,rgba(0,0,0,0));z-index:5}
+
+/* me strip */
+.me{display:flex;gap:14px;align-items:center}
+.avatar{flex:none;width:52px;height:52px;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;font-size:1.05em;
+display:flex;align-items:center;justify-content:center;border:3px solid var(--amber)}
+.me h2{margin:0;font-size:1.2em}
+.me .lvl{color:var(--muted);font-size:.88em}
+.meter{height:10px;border-radius:999px;background:var(--tint);overflow:hidden;margin-top:10px}
+.meter i{display:block;height:100%;background:var(--amber);border-radius:999px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;background:var(--tint);font-size:.84em;color:var(--head);font-weight:700}
+.chip svg.i{width:18px;height:18px}
+
+/* game tiles */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.tile{position:relative;display:flex;flex-direction:column;text-align:left;background:var(--card);border:1px solid var(--line);
+border-radius:var(--r);overflow:hidden;padding:0;box-shadow:var(--shadow);transition:transform .12s,border-color .12s}
+.tile:hover{border-color:var(--amber)}
+.tile:active{transform:scale(.98)}
+.tile .art{height:80px;background:var(--tint);display:flex;align-items:center;justify-content:center}
+.tile .art svg{width:128px;height:64px}
+.tile .body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:3px;flex:1}
+.tile .ttl{font-weight:700;color:var(--head);line-height:1.25}
+.tile .what{font-size:.82em;color:var(--muted);line-height:1.35}
+.tile .rec{margin-top:auto;padding-top:8px;font-size:.8em;color:var(--muted)}
+.tile .rec.good{color:var(--green);font-weight:700}
+.badge{align-self:flex-start;margin-bottom:3px;background:var(--amber);color:#241802;font-weight:700;font-size:.72em;padding:3px 9px;border-radius:999px}
+.tick{position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center}
+.tick svg.i{width:18px;height:18px;stroke-width:3}
+.rows{display:flex;flex-direction:column;gap:10px}
+.rowbtn{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);
+border-radius:var(--r);padding:12px 14px;min-height:66px;box-shadow:var(--shadow)}
+.rowbtn:hover{border-color:var(--amber)}
+.rowbtn .ic{flex:none;width:42px;height:42px;border-radius:11px;background:var(--tint);color:var(--head);display:flex;align-items:center;justify-content:center}
+.rowbtn .tx{flex:1;min-width:0}
+.rowbtn .tx b{color:var(--head);display:block}
+.rowbtn .tx span{display:block;color:var(--muted);font-size:.84em;line-height:1.35}
+.pill{flex:none;font-size:.76em;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--goodbg);color:var(--green)}
+.pill.amber{background:var(--ambbg);color:var(--amb)}
+.foot{margin:28px 4px 0;color:var(--muted);font-size:.8em;line-height:1.5}
+
+/* tab bar */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--card);border-top:1px solid var(--line);
+display:grid;grid-template-columns:repeat(3,1fr);padding-bottom:env(safe-area-inset-bottom)}
+.tabbar button{background:none;border:0;min-height:60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:.76em;color:var(--muted)}
+.tabbar button[aria-current="page"]{color:var(--head);font-weight:700}
+.tabbar button[aria-current="page"] svg.i{color:var(--amber);stroke-width:2.4}
+body.playing .tabbar, body.out .tabbar{display:none}
+
+/* questions */
+.qno{color:var(--amb);font-weight:700;font-size:.86em}
+.qtext{font-size:1.2em;font-weight:700;color:var(--head);line-height:1.35;margin:4px 0 6px}
+.qprompt{color:var(--muted);margin:8px 0 12px}
+.qart{background:var(--tint);border-radius:12px;padding:10px;margin:12px 0;display:flex;justify-content:center}
+.qart svg{width:100%;max-width:340px;height:auto}
+.stepnote{background:var(--goodbg);border-radius:10px;padding:8px 12px;margin:8px 0;font-size:.9em}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opts.two{display:grid;grid-template-columns:1fr 1fr}
+.opt{display:flex;align-items:center;gap:12px;width:100%;min-height:56px;padding:10px 12px;border-radius:12px;
+border:2px solid var(--line);background:var(--card);text-align:left;line-height:1.35}
+.opt .k{flex:none;width:30px;height:30px;border-radius:8px;background:var(--tint);color:var(--head);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.88em}
+.opt .l{flex:1;min-width:0}
+.opt .s{flex:none;font-size:.76em;font-weight:700;text-align:right;max-width:5.5em;line-height:1.2}
+.opt:not(:disabled):hover{border-color:var(--amber)}
+.opt:disabled{cursor:default}
+.opt.correct{border-color:var(--green);background:var(--goodbg)} .opt.correct .s{color:var(--green)}
+.opt.wrong{border-color:var(--red);background:var(--badbg)} .opt.wrong .s{color:var(--red)}
+.opt.dim{opacity:.6}
+.opts.two .opt .s{display:none}
+.fb{margin-top:14px;padding:12px 14px;border-radius:12px;border-left:5px solid var(--green);background:var(--goodbg)}
+.fb.bad{border-left-color:var(--red);background:var(--badbg)}
+.fb.info{border-left-color:var(--amber);background:var(--ambbg)}
+.fb strong{display:block;margin-bottom:2px}
+.fb ol{margin:.4em 0 0 1.2em;padding:0}
+
+/* spot the error */
+.chunks{display:flex;flex-wrap:wrap;gap:8px}
+.chunk{padding:10px 12px;border:2px dashed var(--line);border-radius:10px;background:var(--card);text-align:left;min-height:48px;line-height:1.35}
+.chunk:not(:disabled):hover{border-color:var(--amber)}
+.chunk.is-error{border:2px solid var(--red);background:var(--badbg)}
+.chunk.wrong-pick{border:2px solid var(--amber);background:var(--ambbg)}
+.chunk.fine{opacity:.55}
+.chunk:disabled{cursor:default}
+
+/* brief or spec swipe */
+.deck{position:relative;height:230px;margin:6px 0 16px;touch-action:pan-y;overflow:hidden;border-radius:20px}
+.scard{position:absolute;inset:4px;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;
+border-radius:18px;background:var(--card);border:2px solid var(--head);font-size:1.12em;font-weight:700;color:var(--head);
+box-shadow:0 8px 24px rgba(22,51,91,.12);transition:transform .25s,opacity .25s;user-select:none}
+.scard.back{transform:translateY(10px) scale(.96);opacity:.5;color:transparent;border-color:var(--line)}
+.scard .hint{position:absolute;top:12px;font-size:.72em;padding:3px 10px;border-radius:999px;opacity:0;font-weight:700}
+.scard .hint.l{left:12px;background:var(--tint);color:var(--head)}
+.scard .hint.r{right:12px;background:var(--amber);color:#241802}
+
+/* sequence */
+.pool{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 14px}
+.chip2{min-height:46px;padding:8px 12px;border-radius:10px;border:2px solid var(--head);background:var(--card);color:var(--head);font-weight:700;text-align:left}
+.slots{display:flex;flex-direction:column;gap:8px}
+.slot{display:flex;gap:10px;align-items:center;min-height:50px;border:2px dashed var(--line);border-radius:10px;padding:6px 10px;background:var(--card);text-align:left;width:100%}
+.slot b{flex:none;width:28px;height:28px;border-radius:50%;background:var(--tint);color:var(--head);display:flex;align-items:center;justify-content:center;font-size:.85em}
+.slot.filled{border-style:solid;border-color:var(--head)}
+.slot.ok{border-color:var(--green);background:var(--goodbg)} .slot.no{border-color:var(--red);background:var(--badbg)}
+
+/* ladder */
+.rungs{display:flex;gap:5px;margin:0 0 12px}
+.rungs i{flex:1;height:8px;border-radius:4px;background:var(--line)}
+.rungs i.done{background:var(--green)} .rungs i.miss{background:var(--red)} .rungs i.now{background:var(--amber)}
+.numrow{display:flex;gap:10px;align-items:center}
+.textin{width:100%;min-height:52px;padding:10px 12px;border:2px solid var(--line);border-radius:12px;background:var(--card);font-size:1.05em}
+.textin:focus{border-color:var(--amber);outline:none}
+.numrow .textin{flex:1;font-size:1.2em;font-weight:700}
+.unit{font-weight:700;color:var(--head)}
+.worked{background:var(--tint);border-radius:10px;padding:10px 12px;margin-top:10px;font-size:.92em}
+.worked ol{margin:.3em 0 0 1.2em;padding:0}
+
+/* flash cards */
+.flip{display:block;perspective:1200px;width:100%;border:0;background:none;padding:0;margin:4px 0 14px}
+.flip .inner{display:block;position:relative;height:250px;transition:transform .5s;transform-style:preserve-3d}
+.flip.on .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px;text-align:center}
+.face.front{background:var(--card);border:2px solid var(--head)}
+.face.front strong{font-size:1.45em;color:var(--head);line-height:1.25}
+.face.back{background:var(--navy);color:#fff;transform:rotateY(180deg);font-size:1.02em;line-height:1.45}
+.face.back .muted{color:#C3D3EA}
+
+/* results */
+.result{text-align:center;padding:22px 16px}
+.big{font-size:3.2em;font-weight:700;color:var(--head);line-height:1.1}
+.big small{font-size:.38em;color:var(--muted);font-weight:700}
+.seal{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:6px 14px;border-radius:999px;background:var(--goodbg);color:var(--green);font-weight:700}
+.seal.pop{animation:pop .5s ease-out}
+@keyframes pop{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+.code{display:inline-block;font-weight:700;letter-spacing:.08em;background:var(--card);border:2px solid var(--amber);border-radius:8px;padding:4px 10px;color:var(--head)}
+.review{margin:0;padding-left:1.1em} .review li{margin:.55em 0}
+.copyline{width:100%;min-height:90px;font-size:.84em;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--tint)}
+
+/* record */
+.recard{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center}
+.recard b{color:var(--head)} .recard .meta{grid-column:1/2;color:var(--muted);font-size:.84em}
+.recard .act{grid-row:1/3;grid-column:2/3}
+
+/* check-ins and exit ticket */
+.q{margin:18px 0}
+.q > p, .q > label, .q legend{display:block;font-weight:700;color:var(--head);margin-bottom:8px}
+fieldset.q{border:0;padding:0;margin-left:0;margin-right:0}
+.check{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:2px solid var(--line);border-radius:10px;margin:6px 0;background:var(--card);min-height:48px;font-weight:400;color:var(--ink)}
+.check input{width:22px;height:22px;margin-top:1px;flex:none;accent-color:var(--navy)}
+textarea.textin{min-height:96px;resize:vertical}
+.rag{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.rag button{min-height:48px;border-radius:10px;border:2px solid var(--line);background:var(--card);font-weight:700;font-size:.9em}
+.rag button[aria-pressed="true"].r{background:var(--badbg);border-color:var(--red);color:var(--red)}
+.rag button[aria-pressed="true"].a{background:var(--ambbg);border-color:var(--amber);color:var(--amb)}
+.rag button[aria-pressed="true"].g{background:var(--goodbg);border-color:var(--green);color:var(--green)}
+
+/* sign in */
+.card label[for="code"]{display:block}
+.names{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-top:8px}
+.names button{min-height:50px;border-radius:10px;border:2px solid var(--line);background:var(--card);font-weight:700;color:var(--head);text-align:left;padding:8px 12px}
+.names button:hover{border-color:var(--amber)}
+.codebox{display:block;margin:6px auto 0;text-transform:uppercase;letter-spacing:.3em;font-size:1.5em;font-weight:700;text-align:center;max-width:260px}
+
+/* settings */
+.seg{display:grid;gap:6px;margin:6px 0 14px}
+.seg button{min-height:46px;border-radius:10px;border:2px solid var(--line);background:var(--card);font-weight:700;font-size:.9em}
+.seg button[aria-pressed="true"]{border-color:var(--head);background:var(--tint);color:var(--head)}
+details.tut{margin-top:12px}
+details.tut summary{cursor:pointer;font-weight:700;color:var(--head);min-height:48px;display:flex;align-items:center}
+.tut table{width:100%;border-collapse:collapse;font-size:.86em;margin:8px 0}
+.tut td,.tut th{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+
+/* data card */
+.modal{position:fixed;inset:0;background:rgba(14,26,43,.55);display:flex;align-items:flex-end;justify-content:center;z-index:50}
+.modal .sheet{background:var(--card);width:100%;max-width:640px;max-height:88vh;overflow:auto;border-radius:18px 18px 0 0;padding:16px 16px calc(20px + env(safe-area-inset-bottom))}
+@media (min-width:700px){.modal{align-items:center}.modal .sheet{border-radius:18px}}
+.dtable{width:100%;border-collapse:collapse;font-size:.92em;font-variant-numeric:tabular-nums}
+.dtable th,.dtable td{border:1px solid var(--line);padding:8px;text-align:right}
+.dtable th:first-child,.dtable td:first-child{text-align:left}
+.dtable thead th{background:var(--tint);color:var(--head)}
+.toast{position:fixed;left:50%;bottom:calc(80px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--navy);color:#fff;
+padding:10px 16px;border-radius:12px;z-index:60;max-width:90vw;font-size:.9em}
+
+/* tile and question art */
+.a-i{fill:none;stroke:var(--art);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.a-a{fill:none;stroke:var(--amber);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.a-f{fill:var(--card);stroke:var(--art);stroke-width:2.2;stroke-linejoin:round}
+.a-fa{fill:var(--amber);stroke:none}
+.a-fi{fill:var(--art);stroke:none}
+.a-d{fill:none;stroke:var(--amber);stroke-width:2;stroke-dasharray:6 5}
+.a-t{fill:var(--art);font:700 13px Arial,sans-serif}
+
+@media (min-width:900px){.wrap{max-width:980px}.grid{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+[data-motion="reduce"] *{transition:none!important;animation:none!important}
+
+/* added for the Unit 2 and Unit 8 engines */
+.chunks.lines{flex-direction:column}
+.chunks.lines .chunk{width:100%;font-variant-numeric:tabular-nums}
+.taboo{margin:14px 0 4px;padding:18px 16px;border-radius:16px;border:2px solid var(--head);background:var(--card);text-align:center}
+.taboo .sector{font-size:1.8em;font-weight:700;color:var(--head);line-height:1.15}
+.taboo .dont{margin:10px 0 6px;color:var(--red);font-weight:700;font-size:.82em;text-transform:uppercase;letter-spacing:.08em}
+.taboo .banned{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.taboo .banned span{padding:6px 12px;border-radius:999px;background:var(--badbg);color:var(--red);font-weight:700;text-decoration:line-through}
+.wgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}
+@media (min-width:560px){.wgrid{grid-template-columns:repeat(4,1fr)}}
+.wtile{min-height:64px;padding:8px;border-radius:10px;border:2px solid var(--line);background:var(--card);color:var(--head);font-weight:700;line-height:1.25;font-size:.9em}
+.wtile:not(:disabled):hover{border-color:var(--amber)}
+.wtile[aria-pressed="true"]{border-color:var(--amber);background:var(--ambbg)}
+.wsolved{border-radius:10px;padding:8px 12px;margin-top:8px;border-left:5px solid var(--green);background:var(--goodbg)}
+.wsolved b{display:block;color:var(--head)} .wsolved span{font-size:.88em}
+.wsolved.w1{border-left-color:var(--amber);background:var(--ambbg)}
+.wsolved.w2{border-left-color:var(--head);background:var(--tint)}
+.wsolved.w3{border-left-color:var(--muted);background:var(--tint)}
+.ftable td{text-align:left!important}
+</style>
+</head>
+<body class="out">
+<div id="app"></div>
+<nav class="tabbar" id="tabs" aria-label="Main">
+  <button data-tab="games">Games</button>
+  <button data-tab="record">My record</button>
+  <button data-tab="help">Help</button>
+</nav>
+<div id="live" class="sr" aria-live="polite"></div>
+<script>
+"use strict";
+/* ==========================================================================
+   TUTOR SETTINGS. These are the only two lines in this file you need to edit.
+   Open this file in Notepad, change what is between the quotes, save, then
+   upload it. Every learner who opens it gets these.
+
+   1. FORM_PREFILL
+      The same prefill link as the Unit 1.1 hub. Every unit hub sends to the
+      one results form. It must contain all six markers:
+      LEARNERHERE GAMEHERE SCOREHERE MAXHERE CHECKHERE DETAILHERE
+      Leave it empty and learners copy their result instead of sending it.  */
+
+var FORM_PREFILL = "";
+
+/*    2. CLASS_LIST
+      Each learner's name and hub code joined by an equals sign, separated
+      by a vertical bar. The tracker writes this line for you: Start here
+      sheet, cell B7. Example:
+      var CLASS_LIST = "Alex Example=K7PM|Bea Example=X2Q9";
+      Names only ever show on the learner's own phone. Results carry the
+      code, never the name. Leave it empty and learners type their code.
+      IMPORTANT: if this hub is on a public website, leave CLASS_LIST
+      empty so no names are published. Learners then type their code, or
+      open their personal link from the tracker, which signs them in.     */
+
+var CLASS_LIST = "";
+</script>
+<script>
+"use strict";
+var HUB_CONFIG = {
+  hubName: "Unit 2 practice hub: advances and innovation",
+  kicker: "Engineering Common Core (300), Core Paper 2",
+  unitLabel: "2.2 Significant technological advances and 2.3 Innovation and emerging trends",
+  prefix: "2",              /* goes in front of every game name the tracker sees, e.g. 2 Who am I? */
+  store: "u2bhub",          /* this hub's own record on the phone, kept apart from the other Unit 2 hub */
+  transfer: "U2B",
+  endpoint: "",             /* only for the optional Google Apps Script route */
+  defaultFocus: ["who","tech"],
+  defaultTarget: 150
+};
+
+/* ==========================================================================
+   QUESTION BANK. Every fact here comes from the 2.2 and 2.3 lesson slides.
+   ========================================================================== */
+var A22 = ["Composites", "Electrical power", "Mass production", "Computing"];
+var A23 = ["Data and artificial intelligence", "Robotics", "Energy", "Connected systems"];
+var AREAS = ["Transport", "Healthcare", "Housing", "Employment", "Sustainability"];
+
+var DATA = {
+  /* ---------- G1 Who am I? ---------- */
+  who: [
+    {clue:"I was patented in 1961. I am very stiff and very light, and I am used in aerospace, automotive and marine work.", options:["Carbon fibre","Kevlar","Bakelite","Polyester resin"], correct:0, why:"Carbon fibre, 1961. Kevlar followed five years later."},
+    {clue:"I am a para aramid fibre, invented in 1966, and I am used in ballistic and stab vests.", options:["Kevlar","Carbon fibre","Glass fibre","Bakelite"], correct:0, why:"Kevlar is light and very durable, which is why it is used in body armour."},
+    {clue:"I arrived in 1907 and I was the first fully synthetic polymer.", options:["Bakelite","Kevlar","Polyester resin","Bioplastic"], correct:0, why:"An earlier synthetic polymer arrived in 1869, but Bakelite was the first fully synthetic one."},
+    {clue:"I am made from plant crops rather than from fossil fuels.", options:["Bioplastic","Bakelite","Kevlar","Polyester resin"], correct:0, why:"Bioplastics are part of the search for materials that do the same job with less harm."},
+    {clue:"I was patented in 1936 and I cure to a hard solid, which made me the first choice for composite work.", options:["Polyester resin","Carbon fibre","Kevlar","Bakelite"], correct:0, why:"Polyester resin is a matrix material. Its curing behaviour suited composite moulding."},
+    {clue:"I was developed in 1806 and I make light with an electric arc through a gas. Cinema projector lamps still use my principle.", options:["The arc lamp","The incandescent lamp","The fluorescent lamp","The LED lamp"], correct:0, why:"By the 1870s arc lamps were lighting public spaces commercially."},
+    {clue:"I make light by heating a filament white hot, and I took over from the arc lamp for general use in the late 1880s.", options:["The incandescent lamp","The arc lamp","The fluorescent lamp","The LED lamp"], correct:0, why:"Most of the energy an incandescent lamp uses comes out as heat, not light."},
+    {clue:"I was developed commercially in 1934, but I still turn most of my input energy into heat.", options:["The fluorescent lamp","The LED lamp","The arc lamp","The cathode ray tube"], correct:0, why:"Commercial fluorescent lighting, 1934. LEDs, from the 1960s, are far more efficient."},
+    {clue:"I was designed in 1892, the first practical motor of my kind.", options:["The induction motor","The free piston engine","The gas vacuum engine","The wireless telegraph"], correct:0, why:"1834 brought the first useful battery motor, 1886 a practical direct current motor, and 1892 the induction motor."},
+    {clue:"I was shown in Paris in 1867.", options:["The free piston engine","The induction motor","The gas vacuum engine","The Model T"], correct:0, why:"The gas vacuum engine came first, patented in 1823 for industrial use."},
+    {clue:"From 1908 I made motoring affordable for ordinary families.", options:["The Ford Model T","The free piston engine","The Bessemer process","The national grid"], correct:0, why:"The Model T. The moving assembly line that built it arrived in 1913."},
+    {clue:"I was built in 1785 and I was the first fully automated industrial process.", options:["A flour mill","A car assembly line","A coal fired power station","A steel works"], correct:0, why:"Automation is older than most people think. A water powered spinning frame came even earlier, in 1771."},
+    {clue:"I was completed in 1935 and I connected power stations to customers across the country.", options:["The national grid","The Cragside hydroelectric plant","The BBC","The World Wide Web"], correct:0, why:"By 1940 about two thirds of UK homes had an electricity supply."},
+    {clue:"I ran at Cragside from 1878, and I was the first of my kind.", options:["A hydroelectric plant","A coal fired power station","A wind farm","A nuclear power station"], correct:0, why:"The first large coal fired power station opened in London four years later, in 1882."},
+    {clue:"I was invented by a British scientist in 1989, and my first page appeared in 1991.", options:["The World Wide Web","The internet","Digital audio broadcasting","Radar"], correct:0, why:"The internet came first, created for military use. The Web runs on top of it."},
+    {clue:"I used radio waves during wartime to detect aircraft early.", options:["Radar","Digital audio broadcasting","The wireless telegraph","The cathode ray tube"], correct:0, why:"Wartime need drove radio forward. Radio navigation developed alongside radar."},
+    {clue:"Each of my pixels gives out its own coloured light, which made curved screens practical.", options:["OLED","LCD with LED backlight","Cathode ray tube","Mechanical television"], correct:0, why:"An LCD needs a backlight. An OLED pixel emits its own light."},
+    {clue:"I direct an electron beam onto a fluorescent surface, and I made mechanical television obsolete by 1934.", options:["The cathode ray tube","The OLED screen","The spinning disc","The thermionic valve"], correct:0, why:"Cathode ray tube sets were in most UK homes by the 1960s."}
+  ],
+
+  /* ---------- G2 Impact wheel: two steps per case ---------- */
+  wheel: [
+    {q:"Washing machines, irons and vacuum cleaners changed domestic work.", adv:"Electrical power", advW:["The internal combustion engine","Replaceable parts","Radio"], area:"Housing", areaW:["Transport","Sustainability","Healthcare"]},
+    {q:"Refrigeration improved diet and food safety.", adv:"Electrical power", advW:["Polymers","The internet","The internal combustion engine"], area:"Healthcare", areaW:["Transport","Housing","Employment"]},
+    {q:"Shift work became possible once factories could be lit.", adv:"Electric lighting", advW:["The internal combustion engine","Polymers","Radio"], area:"Employment", areaW:["Transport","Healthcare","Sustainability"]},
+    {q:"Electric trams and lifts appeared, then electric rail.", adv:"Electrical power", advW:["The Bessemer process","Polymers","Computers"], area:"Transport", areaW:["Healthcare","Sustainability","Employment"]},
+    {q:"Roads and suburbs spread out from town centres.", adv:"The internal combustion engine", advW:["The national grid","Radio","Computers"], area:"Housing", areaW:["Healthcare","Sustainability","Employment"]},
+    {q:"People could travel freely without relying on public transport.", adv:"The internal combustion engine", advW:["Radio","The light emitting diode","Polymers"], area:"Transport", areaW:["Healthcare","Housing","Sustainability"]},
+    {q:"Engines now cause roughly a fifth of global carbon dioxide.", adv:"The internal combustion engine", advW:["The light emitting diode","Computers","Radio"], area:"Sustainability", areaW:["Healthcare","Housing","Employment"]},
+    {q:"The same light for far less energy, so lower cost and lower emissions.", adv:"The light emitting diode", advW:["The arc lamp","The internal combustion engine","Radio"], area:"Sustainability", areaW:["Transport","Housing","Employment"]},
+    {q:"Plastic waste became one of the defining engineering problems of this century.", adv:"Polymers", advW:["The Bessemer process","Radio","The national grid"], area:"Sustainability", areaW:["Transport","Housing","Employment"]},
+    {q:"Farm jobs fell while new factory jobs appeared in the towns.", adv:"Automated machines", advW:["The internet","The light emitting diode","Polymers"], area:"Employment", areaW:["Healthcare","Transport","Sustainability"]},
+    {q:"People could work remotely and do business with the whole world.", adv:"The internet", advW:["Radio","The Bessemer process","Polymers"], area:"Employment", areaW:["Healthcare","Housing","Sustainability"]},
+    {q:"Online advice reduces pressure on face to face services.", adv:"The internet", advW:["Radio","Replaceable parts","The national grid"], area:"Healthcare", areaW:["Transport","Housing","Employment"]},
+    {q:"Records are stored, diagnosis is aided and equipment is controlled.", adv:"Computers", advW:["Radio","The Bessemer process","The internal combustion engine"], area:"Healthcare", areaW:["Transport","Housing","Sustainability"]}
+  ],
+
+  /* ---------- G3 True or false? ---------- */
+  tf: [
+    {text:"Steel is the most widely used metal in engineering.", answer:0, why:"True. The Bessemer process made it cheap enough to use everywhere from 1855."},
+    {text:"The first synthetic polymer, from 1869, was Bakelite.", answer:1, why:"False. The 1869 material came first. Bakelite, 1907, was the first fully synthetic polymer."},
+    {text:"Polymers only became preferred over traditional materials in the 1960s.", answer:0, why:"True, nearly a hundred years after the first synthetic polymer."},
+    {text:"Public trust in plastics rose through the 1970s.", answer:1, why:"False. Trust fell as concern about waste grew, and the industry led a recycling drive through the 1980s."},
+    {text:"By 1940 about two thirds of UK homes had an electricity supply.", answer:0, why:"True. The national grid had been completed in 1935."},
+    {text:"In 2019 zero carbon sources produced more UK energy than fossil fuels.", answer:0, why:"True. Coal and gas had supplied most UK energy through the twentieth century."},
+    {text:"The photovoltaic effect was discovered in the 1990s.", answer:1, why:"False. It was discovered in 1839."},
+    {text:"Street lighting in major towns ran on gas before about 1878.", answer:0, why:"True. Candles, oil lamps, gas lights and open fires came before electric light."},
+    {text:"Automation started in the twentieth century.", answer:1, why:"False. A water powered spinning frame dates from 1771, and a fully automated flour mill from 1785."},
+    {text:"The first television broadcasts had about thirty lines of picture.", answer:0, why:"True. A spinning disc with holes scanned the picture line by line."},
+    {text:"Early radio carried voice and music from 1895.", answer:1, why:"False. The 1895 wireless telegraph carried morse code only. Voice and music followed in 1906."},
+    {text:"The UK switchover from analogue to digital television began in 2007.", answer:0, why:"True."},
+    {text:"Interchangeable parts mattered mainly because they made production faster.", answer:1, why:"False. The deeper point is repair: a part could be replaced without the original maker."},
+    {text:"Composites were common in mainstream manufacturing by the 1990s.", answer:0, why:"True. They replaced metal and engineered plastics where cost allowed."},
+    {text:"Robotics is already widespread in welding, painting and assembling car bodies.", answer:0, why:"True. Robotics is mature. Its next step is autonomy."},
+    {text:"The internet of things includes laptops and servers.", answer:1, why:"False. It covers physical machines, equipment and devices, not traditional computers."},
+    {text:"Drones are already common throughout manufacturing.", answer:1, why:"False. They are not yet common. Could be used is the accurate claim."},
+    {text:"The design stage has the greatest effect on a product's sustainability.", answer:0, why:"True. Design fixes the materials, the manufacture and the disposal route."}
+  ],
+
+  /* ---------- G4 Whose job is it? ---------- */
+  jobs: [
+    {job:"Composite laminator", set:0, answer:0, why:"Laying up fibre and resin is composite work."},
+    {job:"Non destructive testing technician", set:0, answer:0, why:"Composite parts are checked for hidden faults without breaking them."},
+    {job:"Grid technician", set:0, answer:1, why:"The grid exists because of electrical power."},
+    {job:"Substation fitter", set:0, answer:1, why:"Substations are part of electricity supply."},
+    {job:"Energy engineer", set:0, answer:1, why:"Listed in the lesson under electrical power."},
+    {job:"Production engineer", set:0, answer:2, why:"Planning how products are made in volume."},
+    {job:"Quality technician", set:0, answer:2, why:"Mass production only works if every part is within tolerance."},
+    {job:"Line supervisor", set:0, answer:2, why:"The moving line needs someone running it."},
+    {job:"CAD technician", set:0, answer:3, why:"Computer aided design depends on computing."},
+    {job:"CNC programmer", set:0, answer:3, why:"Computer numerical control. The computer drives the machine."},
+    {job:"Controls engineer", set:0, answer:3, why:"Listed in the lesson under computing."},
+    {job:"Predictive maintenance technician", set:1, answer:0, why:"Data is used to spot a fault before the machine breaks down."},
+    {job:"Machine learning technician", set:1, answer:0, why:"Machine learning is part of artificial intelligence."},
+    {job:"Cobot programmer", set:1, answer:1, why:"Cobots are robots that work alongside people."},
+    {job:"Automation technician", set:1, answer:1, why:"Listed in the lesson under robotics."},
+    {job:"Robot maintenance engineer", set:1, answer:1, why:"Every robot on the line needs maintaining."},
+    {job:"Wind turbine technician", set:1, answer:2, why:"Renewable generation."},
+    {job:"Battery storage technician", set:1, answer:2, why:"Battery storage helped make distributed energy possible."},
+    {job:"Retrofit assessor", set:1, answer:2, why:"Listed in the lesson under energy."},
+    {job:"IoT installation technician", set:1, answer:3, why:"IoT is the internet of things."},
+    {job:"Industrial network engineer", set:1, answer:3, why:"Connected systems run on industrial networks."}
+  ],
+
+  /* ---------- G5 Line them up ---------- */
+  lines: [
+    {title:"Materials", lead:"Earliest first.", items:[
+      {date:"1855", event:"The Bessemer process", note:"Steel became cheap enough to use everywhere"},
+      {date:"1869", event:"The first synthetic polymer", note:"It could imitate tortoiseshell and ivory"},
+      {date:"1907", event:"Bakelite", note:"The first fully synthetic polymer"},
+      {date:"1936", event:"Polyester resins patented", note:"They cure to a hard solid"},
+      {date:"1961", event:"Carbon fibre patented", note:"Very stiff and very light"},
+      {date:"1966", event:"Kevlar invented", note:"Used in ballistic and stab vests"}]},
+    {title:"Electrical power", lead:"Earliest first.", items:[
+      {date:"Mid 1700s", event:"Electricity investigated", note:"Long before any supply"},
+      {date:"1839", event:"The photovoltaic effect discovered", note:"The basis of solar cells"},
+      {date:"1878", event:"Hydroelectric plant at Cragside", note:"The first in the world"},
+      {date:"1882", event:"Large coal fired power station in London", note:"The world's first"},
+      {date:"1935", event:"The national grid completed", note:"Two thirds of homes connected by 1940"},
+      {date:"2019", event:"Zero carbon sources overtake fossil fuels", note:"In UK energy production"}]},
+    {title:"Lighting", lead:"Earliest first.", items:[
+      {date:"1806", event:"The arc lamp developed", note:"Light from an electric arc through a gas"},
+      {date:"1870s", event:"Arc lamps light public spaces", note:"Commercial use"},
+      {date:"Late 1880s", event:"Incandescent lamps", note:"A filament heated white hot"},
+      {date:"1934", event:"Commercial fluorescent lighting", note:"Still mostly heat"},
+      {date:"1960s", event:"Low power LEDs", note:"About 95 per cent of the energy becomes light"}]},
+    {title:"Engines and motors", lead:"Earliest first.", items:[
+      {date:"1823", event:"Gas vacuum engine patented", note:"For industrial use"},
+      {date:"1834", event:"First battery motor with useful output", note:""},
+      {date:"1867", event:"Free piston engine shown in Paris", note:""},
+      {date:"1884", event:"First British petrol engine", note:""},
+      {date:"1892", event:"First practical induction motor", note:""},
+      {date:"1908", event:"The Ford Model T", note:"Motoring for ordinary families"},
+      {date:"1913", event:"The moving assembly line", note:"Possible only because of interchangeable parts"}]},
+    {title:"Radio and television", lead:"Earliest first.", items:[
+      {date:"1895", event:"The wireless telegraph", note:"Morse code only"},
+      {date:"1906", event:"Long distance voice and music", note:""},
+      {date:"1922", event:"BBC radio across the UK", note:"News, music and drama"},
+      {date:"1936", event:"BBC regular television", note:"Black and white"},
+      {date:"1969", event:"Colour on all three UK channels", note:""},
+      {date:"2007", event:"Digital television switchover begins", note:""}]},
+    {title:"Display technology", lead:"Earliest first.", items:[
+      {date:"1920s", event:"Mechanical television", note:"Spinning disc, about 30 lines"},
+      {date:"1930s to 1990s", event:"Cathode ray tube", note:"Electron beam on a glowing coating"},
+      {date:"2000s", event:"LCD with LED backlight", note:"Flat screen"},
+      {date:"2010s", event:"OLED", note:"Every pixel makes its own light"}]},
+    {title:"Computer generations", lead:"Earliest first.", items:[
+      {date:"1940s", event:"Thermionic valves", note:"Room sized machines"},
+      {date:"1950s", event:"Transistors", note:"Smaller and cooler"},
+      {date:"1960s", event:"Integrated circuits", note:"Many transistors on one chip"},
+      {date:"1970s", event:"Microprocessor", note:"A whole processor on one chip"}]},
+    {title:"Automation and mass production", lead:"Earliest first.", items:[
+      {date:"1771", event:"Water powered automated spinning frame", note:""},
+      {date:"1785", event:"Fully automated flour mill", note:""},
+      {date:"1798", event:"Replaceable parts in a firearms factory", note:""},
+      {date:"Late 1800s", event:"Conveyor belts move coal and ore", note:""},
+      {date:"1913", event:"The moving assembly line", note:""}]}
+  ],
+
+  /* ---------- G6 Number lab ---------- */
+  calcRounds: [
+    {title:"Lighting and running costs", items:[
+      {id:"N1", q:"A filament lamp gives 380 lux at a fixed distance and draws 60 W. Calculate its efficiency.", formula:"efficiency = illuminance ÷ power", answer:6.33, raw:380/60, dp:2, units:["lux per W","W per lux","kWh","£"], unit:0, tol:0.02,
+        worked:["efficiency = illuminance ÷ power","efficiency = 380 lux ÷ 60 W","efficiency = 6.33 lux per W"]},
+      {id:"N2", q:"An LED lamp gives 420 lux at the same distance and draws 7 W. Calculate its efficiency.", formula:"efficiency = illuminance ÷ power", answer:60, raw:60, dp:2, units:["lux per W","W per lux","kWh","per cent"], unit:0, tol:0.02,
+        worked:["efficiency = 420 lux ÷ 7 W","efficiency = 60.00 lux per W","Nearly ten times the filament lamp."]},
+      {id:"N3", q:"An LED lamp draws 10 W. About 5 per cent of its input is wasted as heat. Calculate the power wasted as heat.", formula:"power wasted = input power × per cent wasted ÷ 100", answer:0.5, raw:0.5, dp:2, units:["W","kWh","lux","per cent"], unit:0, tol:0.02,
+        worked:["power wasted = 10 W × 5 ÷ 100","power wasted = 0.50 W","The other 9.50 W becomes light."]},
+      {id:"N4", q:"A workshop's lights run 12 hours a day, 5 days a week, for 38 weeks a year. Calculate the hours of use in a year.", formula:"time t = hours a day × days a week × weeks", answer:2280, raw:2280, dp:0, units:["h","kWh","W","days"], unit:0, tol:0.5,
+        worked:["t = 12 × 5 × 38","t = 2,280 h"]},
+      {id:"N5", q:"The workshop has 24 fittings of 58 W, each running 2,280 hours a year. Calculate the total energy used.", formula:"energy E = power P × time t", answer:3173.76, raw:0.058*2280*24, dp:2, units:["kWh","W","kW","£"], unit:0, tol:0.05,
+        worked:["58 W = 0.058 kW","E = 0.058 kW × 2,280 h = 132.24 kWh per fitting","for 24 fittings, E = 132.24 × 24 = 3,173.76 kWh"]},
+      {id:"N6", q:"Electricity costs 28 pence per kWh. Calculate the annual cost of 3,173.76 kWh.", formula:"cost C = energy E × unit price", answer:888.65, raw:3173.76*0.28, dp:2, units:["£","kWh","pence per kWh","kW"], unit:0, tol:0.02,
+        worked:["C = E × unit price","C = 3,173.76 kWh × £0.28","C = £888.65, to the nearest penny"]},
+      {id:"N7", q:"The 24 fittings are swapped for 18 W LED panels, running the same 2,280 hours at 28 pence per kWh. Calculate the new annual cost.", formula:"cost C = energy E × unit price", answer:275.79, raw:0.018*2280*24*0.28, dp:2, units:["£","kWh","W","per cent"], unit:0, tol:0.02,
+        worked:["E = 0.018 kW × 2,280 h × 24 = 984.96 kWh","C = 984.96 × £0.28","C = £275.79"]},
+      {id:"N8", q:"The old lights cost £888.65 a year and the LED panels cost £275.79. Calculate the annual saving.", formula:"saving = old cost − new cost", answer:612.86, raw:888.65-275.79, dp:2, units:["£","kWh","per cent","W"], unit:0, tol:0.02,
+        worked:["saving = £888.65 − £275.79","saving = £612.86 a year","The argument is money, not opinion."]}
+    ]},
+    {title:"Composites and automation", items:[
+      {id:"N9", q:"A composite coupon breaks at 96 N and has a mass of 16 g. Calculate its strength per gram.", formula:"strength per gram = failure force ÷ mass", answer:6, raw:6, dp:2, units:["N per g","g per N","N","kg"], unit:0, tol:0.02,
+        worked:["strength per gram = 96 N ÷ 16 g","strength per gram = 6.00 N per g"]},
+      {id:"N10", q:"A matrix only coupon breaks at 18 N and has a mass of 12 g. Calculate its strength per gram.", formula:"strength per gram = failure force ÷ mass", answer:1.5, raw:1.5, dp:2, units:["N per g","g per N","N","kg"], unit:0, tol:0.02,
+        worked:["strength per gram = 18 N ÷ 12 g","strength per gram = 1.50 N per g"]},
+      {id:"N11", q:"The composite managed 6.00 N per g and the matrix only coupon 1.50 N per g. How many times better is the composite, gram for gram?", formula:"ratio = composite figure ÷ matrix figure", answer:4, raw:4, dp:2, units:["times","N per g","N","g"], unit:0, tol:0.02,
+        worked:["ratio = 6.00 ÷ 1.50","ratio = 4.00 times","Divide by mass first. Raw force is not a fair comparison."]},
+      {id:"N12", q:"A person takes 14.0 s to do a task. A programmed robot arm takes 9.0 s. Calculate the time saved on each cycle.", formula:"time saved = person's time − machine's time", answer:5, raw:5, dp:2, units:["s","cycles","min","per cent"], unit:0, tol:0.02,
+        worked:["time saved = 14.0 s − 9.0 s","time saved = 5.00 s a cycle"]},
+      {id:"N13", q:"Programming the robot took 45 minutes. It saves 5.0 s on every cycle. How many cycles before it has paid back the programming time?", formula:"cycles to pay back = programming time ÷ time saved a cycle", answer:540, raw:540, dp:0, units:["cycles","s","min","h"], unit:0, tol:0.5,
+        worked:["45 min = 45 × 60 = 2,700 s","cycles = 2,700 s ÷ 5.0 s","cycles = 540","Change minutes to seconds first."]},
+      {id:"N14", q:"A person's ten timings range from 12.4 s to 16.8 s. Calculate the spread.", formula:"spread = longest time − shortest time", answer:4.4, raw:16.8-12.4, dp:2, units:["s","cycles","per cent","min"], unit:0, tol:0.02,
+        worked:["spread = 16.8 s − 12.4 s","spread = 4.40 s","Consistency is what employers are buying, so the spread matters as much as the average."]}
+    ]}
+  ],
+
+  /* ---------- G7 Name that tech ---------- */
+  tech: [
+    {text:"A worker wiring a control panel sees the wiring diagram laid over the real panel.", options:["Augmented reality","Virtual reality","Digitalisation","Cloud computing"], correct:0, why:"It adds information to what the worker can already see."},
+    {text:"Wearing a headset, aerospace engineers assemble and test a complex part before any physical part is made.", options:["Virtual reality","Augmented reality","Drones","Robotics"], correct:0, why:"The digital scene replaces the real view entirely."},
+    {text:"Photographs of skin are analysed to recognise cancers early.", options:["Artificial intelligence","Digitalisation","Virtual reality","The internet of things"], correct:0, why:"The system gathers, analyses and decides. That improves early diagnosis and survival rates."},
+    {text:"Assembly instructions and drawings appear on a screen at each workstation, so there is no paper.", options:["Digitalisation","Augmented reality","Artificial intelligence","Robotics"], correct:0, why:"Paper systems turned into digital data."},
+    {text:"Royal Mail trials delivering post to remote island communities without a pilot on board.", options:["Drones","Robotics","Cyber physical systems","Cloud computing"], correct:0, why:"A named UK example you can quote in an exam."},
+    {text:"A factory fits rooftop solar panels to generate its own electricity close to where it is used.", options:["Distributed energy","Hybrid technology system","Cloud computing","Digitalisation"], correct:0, why:"Small scale, local generation. One source on its own is not a hybrid."},
+    {text:"A remote site runs photovoltaic cells and a wind turbine together, so power keeps coming whenever there is wind or daylight.", options:["Hybrid technology system","Cyber physical system","The internet of things","Autonomous system"], correct:0, why:"Two different technologies combined in one system."},
+    {text:"A car runs on both petrol and electricity.", options:["Hybrid technology system","Distributed energy","Autonomous system","Cyber physical system"], correct:0, why:"The hybrid everyone knows."},
+    {text:"A vehicle uses artificial intelligence, vision systems and sensors to drive itself.", options:["Autonomous system","Robotics","Drones","The internet of things"], correct:0, why:"An autonomous system combines AI, vision, sensors and robotics to operate independently."},
+    {text:"A wearable monitor sends a patient's heart rate over a network.", options:["The internet of things","Cloud computing","Artificial intelligence","Virtual reality"], correct:0, why:"A physical device with sensors and networking."},
+    {text:"A small firm pays a monthly subscription for software and storage it reaches through the internet.", options:["Cloud computing","The internet of things","Digitalisation","Distributed energy"], correct:0, why:"Often cheaper to subscribe than to buy and maintain the equipment."},
+    {text:"Field sensors direct water, fertiliser and herbicide exactly where they are needed.", options:["Cyber physical system","Drones","Cloud computing","Digitalisation"], correct:0, why:"Precision farming: computing and networking joined to physical equipment."},
+    {text:"Robots weld, paint and assemble car bodies.", options:["Robotics","Drones","Virtual reality","Digitalisation"], correct:0, why:"Robots doing physical tasks people used to do. Already widespread."},
+    {text:"With suitable sensors, an exoskeleton gives a patient back their independence.", options:["Robotics","Virtual reality","Cloud computing","Digitalisation"], correct:0, why:"Where robotics is going next: the medical sector."},
+    {text:"Temperature and vibration data are used to spot a machine fault before it breaks down.", options:["Artificial intelligence","Virtual reality","Drones","Digitalisation"], correct:0, why:"Predictive maintenance. It comes back in criterion 1.2."},
+    {text:"Robots locate components and move them to a cell on time, with no one telling them what to do.", options:["Autonomous system","Augmented reality","Cloud computing","Digitalisation"], correct:0, why:"An automated machine repeats. An autonomous one decides."}
+  ],
+
+  /* ---------- G8 Definition detective ---------- */
+  detective: [
+    {term:"Virtual reality", chunks:["An immersive technology","that adds computer generated information to the real world you can see","using a head mounted display and motion sensors."], bad:1, why:"That describes augmented reality. Virtual reality replaces the real view with a digitally generated scene."},
+    {term:"Augmented reality", chunks:["Technology that lets users enhance","their real world experience","by replacing everything they can see with a digital scene."], bad:2, why:"Augmented reality adds real time computer generated overlays. Replacing the view is virtual reality."},
+    {term:"Artificial intelligence", chunks:["The ability of machines to gather information","and perform analysis,","with a person always making the final decision."], bad:2, why:"The definition ends with machines making autonomous decisions. Gather, analyse, decide."},
+    {term:"The internet of things", chunks:["A network of physical machines, equipment and devices","embedded with sensors and networking technology,","including laptops and servers."], bad:2, why:"It does not include traditional computers such as laptops and servers."},
+    {term:"Cloud computing", chunks:["Users remotely access","storage, software and networking","that they must buy and keep on site."], bad:2, why:"The services are reached through the internet. It is often cheaper to subscribe than to buy."},
+    {term:"Distributed energy", chunks:["Small scale,","localised electricity generation,","usually from one large coal fired power station."], bad:2, why:"Usually from renewable sources such as rooftop solar and small wind units."},
+    {term:"The circular economy", chunks:["Make products last as long as possible,","use only renewable energy,","and send what is left to landfill at the end of life."], bad:2, why:"The aim is zero waste at end of life."},
+    {term:"Sustainability", chunks:["Fulfilling our current needs","without compromising","the profits of today's businesses."], bad:2, why:"Without compromising the needs of future generations."},
+    {term:"The Bessemer process", chunks:["Burning off carbon and impurities in pig iron","by blasting air through the molten metal,","which made aluminium cheap from 1855."], bad:2, why:"It made steel cheap, not aluminium."},
+    {term:"A composite", chunks:["The fibre carries the load,","the matrix transfers load between the fibres,","so a composite is simply a mixture of two materials."], bad:2, why:"A composite is not a mixture. Each part has a different job, and neither works without the other."},
+    {term:"The cathode ray tube", chunks:["A vacuum tube","that directs an electron beam","through a spinning disc with holes."], bad:2, why:"The beam hits a fluorescent surface. The spinning disc belonged to mechanical television."},
+    {term:"The internal combustion engine", chunks:["The fuel is burned outside the engine,","the first British petrol engine was made in 1884,","and commercial petrol engines for vehicles appeared by 1886."], bad:0, why:"Internal means the fuel is burned inside the engine. A steam engine burns it outside."},
+    {term:"Cyber physical systems", chunks:["Systems that integrate computerisation,","networking,","and paper based records."], bad:2, why:"The third part is physical processes, equipment or machinery."},
+    {term:"Robotics", chunks:["The design, development and manufacture of robots","able to do physical tasks people used to do,","which has not yet reached manufacturing."], bad:2, why:"Robots are already widespread in welding, painting, assembly, picking and packing."},
+    {term:"The LED lamp", chunks:["About 95 per cent of the input energy becomes light,","only about 5 per cent is wasted as heat,","so it costs more to run than a filament lamp."], bad:2, why:"Less energy for the same light means lower cost and lower emissions."},
+    {term:"Hybrid technology systems", chunks:["Two or more different technologies","combined in one product or system","to make it cheaper to throw away."], bad:2, why:"They are combined to improve utility or efficiency."}
+  ],
+
+  /* ---------- G9 Both sides ---------- */
+  both: [
+    {text:"Polymers are light and good insulators, so they save fuel in heating and transport.", answer:0, why:"A benefit. The same material is also a waste problem, so hold both sides."},
+    {text:"Plastic waste is one of the defining engineering problems of this century.", answer:1, why:"The cost side of polymers."},
+    {text:"The car gave people the freedom to travel without public transport.", answer:0, why:"A transport benefit of the internal combustion engine."},
+    {text:"Engines cause roughly a fifth of global carbon dioxide.", answer:1, why:"The sustainability cost that is driving the shift to electric vehicles."},
+    {text:"The engine created a huge new industry with well paid factory work.", answer:0, why:"An employment benefit."},
+    {text:"Society came to depend on a worldwide oil industry.", answer:1, why:"A creditable drawback in a 9 mark answer."},
+    {text:"Goods became far more plentiful and much cheaper.", answer:0, why:"A benefit of automation between 1770 and 1850."},
+    {text:"Agricultural machinery reduced the number of farm jobs.", answer:1, why:"The jobs moved to the towns. Say where the work went."},
+    {text:"On the assembly line each worker repeated one narrow task for a full shift.", answer:1, why:"The human cost of mass production."},
+    {text:"High street shops declined as online retail grew.", answer:1, why:"A negative consequence of widespread internet access."},
+    {text:"Online advice reduces pressure on face to face health services.", answer:0, why:"A healthcare benefit of the internet."},
+    {text:"Drones can inspect offshore wind turbines without sending a person up the tower.", answer:0, why:"A safety benefit."},
+    {text:"Generating its own power protects a factory from swings in energy prices.", answer:0, why:"Distributed energy is an environmental decision that is also a financial one."},
+    {text:"Landfill causes local pollution and releases methane, a greenhouse gas.", answer:1, why:"Which is why landfill sits at the bottom of the waste hierarchy."},
+    {text:"Fluorescent lamps still turn most of their input energy into heat.", answer:1, why:"A drawback compared with LEDs."},
+    {text:"Cobots use vision sensors and AI to work safely alongside people.", answer:0, why:"A benefit, and they can be trained quickly."}
+  ],
+
+  /* ---------- G10 Linear or circular? ---------- */
+  circ: [
+    {text:"Take, make, use, throw away.", answer:0, why:"The linear model ends in disposal."},
+    {text:"Lease the product rather than sell it.", answer:1, why:"Leasing keeps the product with the maker, who has a reason to make it last."},
+    {text:"Design out waste from the start.", answer:1, why:"Circularity is decided at the design stage."},
+    {text:"The product ends its life in landfill.", answer:0, why:"The circular model has no end point."},
+    {text:"Repair and remanufacture products.", answer:1, why:"Gets more use out of every product."},
+    {text:"Keep materials in use for as long as possible.", answer:1, why:"The core aim of the circular economy."},
+    {text:"Glue the parts together so they can never be separated.", answer:0, why:"Materials that cannot be separated cannot be reused or recycled."},
+    {text:"Buy a new one whenever the old one breaks.", answer:0, why:"Straight back to take, make, use, throw away."},
+    {text:"Share one product between several users.", answer:1, why:"Sharing is one of the circular economy actions."},
+    {text:"Run production on renewable energy only.", answer:1, why:"Part of the definition of the circular economy."},
+    {text:"Extract new raw material for every product made.", answer:0, why:"The take step of the linear model."},
+    {text:"Recycle whatever is left at the end.", answer:1, why:"Recycling is part of the circle, but it is the last step, not the whole idea."}
+  ],
+
+  /* ---------- G11 Where does it go? ---------- */
+  waste: [
+    {text:"Used solvents and paints from the spray booth", options:["Store safely, then use an approved specialist contractor","Put them in the general waste skip","Dilute them and pour them down the drain","Burn them in a bin on site"], correct:0, why:"Hazardous waste. Disposal by approved specialists is a legal duty under COSHH."},
+    {text:"Waste lubricating oil drained from a gearbox", options:["Store safely, then use an approved specialist contractor","Put it in the general waste skip","Pour it onto waste ground","Mix it with the swarf"], correct:0, why:"Waste lubricants are hazardous. Waste management is a legal obligation, not a preference."},
+    {text:"Swarf from the CNC lathes", options:["Collect it and send it for recycling","Send it to landfill","Burn it for heat","Leave it under the machine"], correct:0, why:"Machining waste metal, chips or swarf, can be recycled."},
+    {text:"A delivery pallet that is still sound", options:["Use it again","Shred it for recycling","Burn it for heat","Send it to landfill"], correct:0, why:"Reuse sits above recycling in the waste hierarchy."},
+    {text:"Oversized packaging the designer could simply leave out", options:["Prevention: do not create it","Recycle it after delivery","Burn it for heat","Send it to landfill"], correct:0, why:"Prevention is top of the waste hierarchy. The best waste is the waste never made."},
+    {text:"A drill that stopped working because one switch failed", options:["Repair it and use it again","Recycle the whole drill","Send it to landfill","Burn it for heat"], correct:0, why:"Check, clean and repair, so it can be used again."},
+    {text:"Mixed waste that cannot be reused or recycled, but will burn", options:["Incinerate it with heat recovery","Send it to landfill straight away","Pour it down the drain","Store it on site for ever"], correct:0, why:"Other recovery: the heat can warm homes or generate electricity. Landfill is the last resort."},
+    {text:"Waste that cannot be prevented, reused, recycled or recovered", options:["Landfill, as the last resort","Recycling","Reuse","Prevention"], correct:0, why:"Disposal is the least preferred option. Use it only when nothing above it will do."}
+  ],
+
+  /* ---------- G12 Mark the answer ---------- */
+  marker: [
+    {q:"Give an example of how the development of materials has affected modern society. (2 marks)", a:"The Bessemer process was invented in 1855.", max:2, correct:1, why:"One mark for the development. There is no consequence, so no second mark."},
+    {q:"Give an example of how the development of materials has affected modern society. (2 marks)", a:"The Bessemer process made steel cheap enough to mass produce, so railways, bridges and tall buildings could be built.", max:2, correct:2, why:"A development and a named consequence. Both marks."},
+    {q:"Give an example of how the development of materials has affected modern society. (2 marks)", a:"Materials got better over time and this helped people a lot.", max:2, correct:0, why:"No named development and no specific consequence."},
+    {q:"Outline a manufacturing application that could make effective use of augmented reality. (2 marks)", a:"Wiring diagrams are overlaid on the real panel, so the worker does not have to look away at a drawing.", max:2, correct:2, why:"One mark for the application and one for why augmented reality suits it."},
+    {q:"Outline a manufacturing application that could make effective use of augmented reality. (2 marks)", a:"Showing wiring diagrams to workers.", max:2, correct:1, why:"The application earns one mark. It does not say why augmented reality suits it."},
+    {q:"Outline a manufacturing application that could make effective use of augmented reality. (2 marks)", a:"Augmented reality could be used in a factory.", max:2, correct:0, why:"No application is named."},
+    {q:"Explain two advantages of using electric motors instead of steam engines. (4 marks)", a:"Each machine could run on its own. Motors needed less maintenance.", max:4, correct:2, why:"Two points, but no consequence for either. Each advantage is worth two marks: the point and the consequence."},
+    {q:"Explain two advantages of using electric motors instead of steam engines. (4 marks)", a:"Each machine had its own motor, so line shafts and belts were not needed and the factory layout was freed up. Motors lost far less energy to friction, so more of the input energy did useful work.", max:4, correct:4, why:"Two points, each with its consequence."},
+    {q:"Describe how cyber physical systems could be used to increase crop yields in farming. (4 marks)", a:"Sensors measure the soil moisture. The data is sent over a network to a control system.", max:4, correct:2, why:"Sense and transmit are there. Analyse and act are missing, and so is the effect on yield."},
+    {q:"Describe how cyber physical systems could be used to increase crop yields in farming. (4 marks)", a:"Farmers could use cyber physical systems and other new technology.", max:4, correct:0, why:"Naming the technology alone is not enough. Marks are for the data path: sense, transmit, analyse, act."}
+  ],
+
+  /* ---------- G13 Link wall ---------- */
+  wall: [
+    {title:"Significant advances", groups:[
+      {link:"The switching device in each computer generation", tiles:["Thermionic valve","Transistor","Integrated circuit","Microprocessor"]},
+      {link:"Ways of making electric light", tiles:["Arc lamp","Incandescent lamp","Fluorescent lamp","LED lamp"]},
+      {link:"What cheap steel made possible", tiles:["Railways","Bridges","Dams","Tall buildings"]},
+      {link:"Why electric motors beat line shafts", tiles:["Independent machines","Less maintenance","Lower friction losses","Free factory layout"]}]},
+    {title:"Innovation in practice", groups:[
+      {link:"Ways drones could be used in manufacturing", tiles:["Warehouse stocktaking","Moving parts around site","Turbine inspection","Mapping unsafe spaces"]},
+      {link:"Jobs artificial intelligence is doing", tiles:["Spotting skin cancers","Predicting machine faults","Guiding cobots","Sorting recycling"]},
+      {link:"Hybrid technology combinations", tiles:["Solar with wind","Wind with diesel","Fuel cell with gas turbine","Petrol with electric"]},
+      {link:"Where augmented reality is used", tiles:["Medicine","Education","Navigation","Policing"]}]}
+  ],
+
+  /* ---------- Check yourself cards ---------- */
+  flash: [
+    {deck:"2.2", term:"What did the Bessemer process make possible?", def:"Cheap steel from 1855, so railways, bridges, dams and tall buildings could be built."},
+    {deck:"2.2", term:"What is a composite, and what does each part do?", def:"Two materials working as one. The fibre carries the load. The matrix holds the fibres in place and transfers load between them."},
+    {deck:"2.2", term:"Roughly what proportion of an LED's energy becomes light?", def:"About 95 per cent. Only about 5 per cent is wasted as heat."},
+    {deck:"2.2", term:"Why did interchangeable parts matter for repair?", def:"A broken part could be replaced without going back to the original maker."},
+    {deck:"2.2", term:"Name the switching device in the first three computer generations.", def:"Thermionic valves in the 1940s, transistors in the 1950s, integrated circuits from the 1960s."},
+    {deck:"2.2", term:"Give one negative consequence of widespread internet access.", def:"For example, high street shops declined as online retailing grew."},
+    {deck:"2.2", term:"The five areas on the impact wheel", def:"Transport, healthcare, housing, employment and sustainability."},
+    {deck:"2.2", term:"Why does a date on its own earn no marks?", def:"The marks are for the consequence: what the advance changed for people or the environment."},
+    {deck:"2.2", term:"Three advantages of electric motors over line shafts", def:"Each machine runs independently, far less maintenance, and much lower friction losses."},
+    {deck:"2.2", term:"Why did cheap polymers matter socially?", def:"Goods that once needed ivory or tortoiseshell became affordable to people who could not buy them before."},
+    {deck:"2.2", term:"How does an incandescent lamp make light?", def:"A filament is heated white hot."},
+    {deck:"2.2", term:"LCD against OLED", def:"An LCD is backlit and the liquid crystal controls each pixel's colour. In an OLED each pixel gives out its own light."},
+    {deck:"2.2", term:"How did work change between 1770 and 1850?", def:"Farm jobs fell, factory jobs grew in the towns, and hundreds of thousands of people moved into industrial towns."},
+    {deck:"2.2", term:"What did the moving assembly line need first?", def:"Interchangeable parts. The line cannot wait while a part is filed to fit."},
+    {deck:"2.2", term:"What does a 9 mark answer need to reach the top band?", def:"A judgement. Two lists with no conclusion cannot reach the top band."},
+    {deck:"2.2", term:"When was the national grid completed?", def:"1935. By 1940 about two thirds of UK homes had an electricity supply."},
+    {deck:"2.3", term:"What three things does artificial intelligence do, by definition?", def:"It gathers information, performs analysis and makes autonomous decisions."},
+    {deck:"2.3", term:"The key difference between virtual and augmented reality", def:"Virtual reality replaces the real view. Augmented reality adds information to it."},
+    {deck:"2.3", term:"Why does the internet of things leave out laptops and servers?", def:"It is a network of physical machines, equipment and devices given sensors and networking, not traditional computers."},
+    {deck:"2.3", term:"Name the six Rs.", def:"Reduce, reuse, recycle, rethink, refuse, repair."},
+    {deck:"2.3", term:"Which life cycle stage gives the engineer most influence?", def:"Design, because it fixes the materials, the manufacture and the disposal route."},
+    {deck:"2.3", term:"Give one measure above recycling in the waste hierarchy.", def:"Prevention, or preparing for reuse."},
+    {deck:"2.3", term:"Automated against autonomous", def:"An automated machine repeats a fixed sequence. An autonomous one senses, decides and acts."},
+    {deck:"2.3", term:"Two consequences of distributed generation", def:"Less energy lost in transmission, and a more resilient network."},
+    {deck:"2.3", term:"The four parts named in the autonomous systems definition", def:"Artificial intelligence, vision systems, sensor technology and robotics."},
+    {deck:"2.3", term:"Why do firms choose cloud computing?", def:"It is often cheaper to subscribe than to buy and maintain equipment, and it works from any location and device."},
+    {deck:"2.3", term:"What gas does landfill release?", def:"Methane, a greenhouse gas. Landfill also causes local pollution."},
+    {deck:"2.3", term:"Who must dispose of hazardous waste such as solvents?", def:"Approved specialist contractors. It is a legal duty under COSHH."},
+    {deck:"2.3", term:"What is the 725,000 figure?", def:"The net new jobs needed in the UK to deliver net zero, according to the Climate Change Committee."},
+    {deck:"2.3", term:"Four alternatives to petrol and diesel", def:"LPG, biofuel, hydrogen and electric."},
+    {deck:"2.3", term:"What is biomass?", def:"Organic material from plants or animals, such as wood, sewage and ethanol from crops."},
+    {deck:"2.3", term:"Start a careful prediction", def:"Current evidence suggests that ... The extent of this effect will depend on ..."}
+  ]
+};
+
+/* ---------- tile pictures ---------- */
+var TILE_ART = {
+  who: '<circle class="a-i" cx="56" cy="34" r="16"/><path class="a-i" d="M28 72c4-14 16-20 28-20s24 6 28 20"/><text class="a-t" x="104" y="52" style="fill:var(--amb);font-size:34px">?</text>',
+  wheel: '<circle class="a-f" cx="80" cy="40" r="12"/><circle class="a-a" cx="80" cy="10" r="7"/><circle class="a-i" cx="112" cy="30" r="7"/><circle class="a-i" cx="100" cy="66" r="7"/><circle class="a-i" cx="60" cy="66" r="7"/><circle class="a-i" cx="48" cy="30" r="7"/><path class="a-i" d="M80 28v-11M91 36l14-4M88 50l7 10M72 50l-7 10M69 36l-14-4"/>',
+  tf: '<rect class="a-i" x="22" y="18" width="50" height="44" rx="6"/><path class="a-a" d="M34 40l8 8 18-18"/><rect class="a-i" x="88" y="18" width="50" height="44" rx="6"/><path class="a-i" d="M102 28l22 24M124 28l-22 24"/>',
+  jobs: '<rect class="a-i" x="40" y="24" width="80" height="46" rx="6"/><path class="a-i" d="M66 24v-8h28v8"/><path class="a-a" d="M40 44h80"/><rect class="a-f" x="74" y="38" width="12" height="12" rx="2"/>',
+  line: '<path class="a-i" d="M14 40h132"/><circle class="a-f" cx="26" cy="40" r="5"/><circle class="a-f" cx="58" cy="40" r="5"/><circle class="a-f" cx="90" cy="40" r="5"/><circle class="a-fa" cx="122" cy="40" r="6"/><path class="a-a" d="M132 34l10 6-10 6"/>',
+  calc: '<rect class="a-i" x="54" y="8" width="52" height="66" rx="6"/><rect class="a-a" x="62" y="16" width="36" height="14" rx="2"/><path class="a-i" style="stroke-width:6" d="M68 44h0M80 44h0M92 44h0M68 56h0M80 56h0M92 56h0M68 66h0M80 66h0M92 66h0"/>',
+  tech: '<rect class="a-i" x="30" y="14" width="64" height="44" rx="5"/><path class="a-i" d="M50 70h24M62 58v12"/><circle class="a-a" cx="118" cy="30" r="10"/><path class="a-a" d="M110 46q8 6 16 0M104 54q14 10 28 0"/>',
+  detective: '<path class="a-i" d="M14 22h64M14 36h40M14 50h56"/><path class="a-a" d="M56 36h22"/><circle class="a-i" cx="112" cy="36" r="18"/><path class="a-i" d="M125 49l16 16"/>',
+  both: '<path class="a-i" d="M80 14v54M40 26h80"/><path class="a-a" d="M40 26l-16 26h32z"/><path class="a-i" d="M120 26l-16 26h32z"/><path class="a-i" d="M64 70h32"/>',
+  circ: '<path class="a-i" d="M14 18h40M14 32h40M14 46h40M14 60h40"/><path class="a-i" d="M60 39h10"/><circle class="a-a" cx="118" cy="40" r="24"/><path class="a-a" d="M134 20l6 4-7 3"/>',
+  waste: '<path class="a-i" d="M56 26h48l-6 46H62z"/><path class="a-i" d="M50 26h60M72 18h16v8"/><path class="a-a" d="M74 36v26M86 36v26"/>',
+  marker: '<rect class="a-i" x="34" y="10" width="62" height="62" rx="4"/><path class="a-i" d="M44 26h40M44 38h40M44 50h22"/><path class="a-a" d="M106 50l8 8 16-20"/><text class="a-t" x="100" y="30" style="fill:var(--amb);font-size:15px">2/2</text>',
+  wall: (function(){ var s = ""; for (var r=0;r<4;r++) for (var c=0;c<4;c++) s += '<rect class="'+(r===2 ? "a-a" : "a-i")+'" x="'+(38+c*22)+'" y="'+(6+r*18)+'" width="18" height="14" rx="3"/>'; return s; })()
+};
+
+/* ---------- turning the question bank into rounds ---------- */
+function ids(list, tag){ return list.map(function(x, k){ return Object.assign({id:tag+(k+1)}, x); }); }
+function sortItems(list, tag, options, lead){
+  return ids(list, tag).map(function(x){ return {id:x.id, label:x.text, lead:lead, prompt:x.text, options:options, correct:[x.answer], why:x.why}; });
+}
+function pickItems(list, tag, prompt, lead){
+  return ids(list, tag).map(function(x){
+    var m = mix(x.options[x.correct], x.options.filter(function(_, k){ return k !== x.correct; }));
+    return {id:x.id, label:prompt(x), lead:lead, prompt:prompt(x), options:m.options, correct:m.correct, why:x.why};
+  });
+}
+var MAKE = {
+  who: function(){ return pickItems(DATA.who, "W", function(x){ return x.clue; }, "Who am I?"); },
+  wheel: function(){ return ids(DATA.wheel, "I").map(function(x){ var m = mix(x.adv, x.advW);
+    return {id:x.id, label:x.q, lead:"Which advance caused this?", prompt:x.q, options:m.options, correct:m.correct, why:"An impact wheel point for " + x.adv.charAt(0).toLowerCase() + x.adv.slice(1) + ", under " + x.area.toLowerCase() + "."}; }); },
+  tf: function(){ return sortItems(DATA.tf, "T", ["True", "False"], "True or false?"); },
+  jobs: function(){ return ids(DATA.jobs, "J").map(function(x){
+    return {id:x.id, label:x.job, lead:"Which area of engineering created this job?", prompt:x.job, options:x.set ? A23 : A22, correct:[x.answer], why:x.why}; }); },
+  tech: function(){ return pickItems(DATA.tech, "N", function(x){ return x.text; }, "Which technology is this?"); },
+  both: function(){ return sortItems(DATA.both, "B", ["Benefit", "Drawback"], "Benefit or drawback?"); },
+  circ: function(){ return sortItems(DATA.circ, "C", ["Linear economy", "Circular economy"], "Linear or circular?"); },
+  waste: function(){ return pickItems(DATA.waste, "D", function(x){ return x.text; }, "What should happen to it?"); },
+  marker: function(){ return ids(DATA.marker, "M").map(function(x){
+    var opts = []; for (var k=0;k<=x.max;k++) opts.push(k + (k === 1 ? " mark" : " marks"));
+    return {id:x.id, label:x.q + " Answer: " + x.a, lead:x.q, prompt:"“" + x.a + "”", sub:"How many marks would this answer get?", options:opts, correct:[x.correct], why:x.why}; }); }
+};
+function mcqGame(key, title, what, n, opts){
+  return {key:key, title:title, what:what, mcq:MAKE[key], run:function(){ runMCQ(key, shuffle(MAKE[key]()).slice(0, n || 10), opts); }};
+}
+function orderSet(r, k, tag){ return {id:tag+(k+1), title:r.title, lead:r.lead || "Earliest first.", why:"", steps:r.items.map(function(x){ return {t:x.event, tag:x.date, note:x.note}; })}; }
+function wheelCases(){
+  return shuffle(ids(DATA.wheel, "I")).slice(0, 8).map(function(x){
+    return {id:x.id, q:x.q, steps:[
+      {label:"Which advance caused this?", correct:x.adv, wrongs:x.advW},
+      {label:"Which area of the impact wheel is it?", correct:x.area, wrongs:x.areaW}]};
+  });
+}
+
+var UNIT = {
+  games: [
+    mcqGame("who", "Who am I?", "Read the clue. Name the material, lamp, engine or invention."),
+    {key:"wheel", title:"Impact wheel", what:"A consequence. Name the advance behind it, then its area of the wheel.", mcq:MAKE.wheel,
+      run:function(key){ runSteps(key, wheelCases(), {label:"Case"}); }},
+    mcqGame("tf", "True or false?", "Quick facts from both lessons. Some are traps.", 12, {cols:2}),
+    mcqGame("jobs", "Whose job is it?", "A real job title. Which advance or technology created it?"),
+    {key:"line", title:"Line them up", what:"Eight rounds: materials, power, lighting, engines, screens, computers and more.",
+      run:function(key){ chooseRound(key, DATA.lines.map(function(r){ return {title:r.title, sub:r.items.length+" cards"}; }),
+        function(k){ runOrder(key, orderSet(DATA.lines[k], k, "LN"), {round:DATA.lines[k].title}); }); }},
+    {key:"calc", title:"Number lab", what:"The sums from the lamp and robot practicals. Type the number, pick the unit.",
+      run:function(key){ chooseRound(key, DATA.calcRounds.map(function(r){ return {title:r.title, sub:r.items.length+" questions"}; }),
+        function(k){ runCalc(key, Object.assign({rule:"Money to the nearest penny. Cycles and hours as whole numbers. Everything else to two decimal places."}, DATA.calcRounds[k])); }); }},
+    mcqGame("tech", "Name that tech", "A real use. Which emerging technology is it?"),
+    {key:"detective", title:"Definition detective", what:"Each definition has one wrong part. Tap it.",
+      run:function(key){ runErrors(key, shuffle(ids(DATA.detective, "E")).slice(0, 10).map(function(x){ return {id:x.id, title:x.term, chunks:x.chunks.map(function(c){ return c.replace(/[.,]$/, ""); }), wrong:x.bad, fix:x.why}; }),
+        {label:"Definition", ask:"One part of this definition is wrong. Tap it."}); }},
+    mcqGame("both", "Both sides", "Benefit or drawback? Practice for evaluate questions.", 12, {cols:2}),
+    mcqGame("circ", "Linear or circular?", "Does it belong to take, make, throw away, or to the circular economy?", 10, {cols:2}),
+    mcqGame("waste", "Where does it go?", "Real workshop waste. Pick the right route.", 8),
+    mcqGame("marker", "Mark the answer", "Be the examiner. How many marks does each answer get?", 10),
+    {key:"wall", title:"Link wall", what:"Sixteen tiles, four hidden links. Three wrong guesses allowed.",
+      run:function(key){ chooseRound(key, DATA.wall.map(function(r){ return {title:r.title, sub:"Four groups of four"}; }),
+        function(k){ runWall(key, DATA.wall[k]); }); }},
+    {key:"quick", title:"Quick mix", what:"Ten mixed questions from 2.2 and 2.3. New set every time."}
+  ],
+  TILE_ART: TILE_ART,
+  flashDecks: [
+    {title:"Both lessons", sub:DATA.flash.length+" cards", cards:function(){ return flashCards(); }},
+    {title:"2.2 Significant advances", sub:flashCards("2.2").length+" cards", cards:function(){ return flashCards("2.2"); }},
+    {title:"2.3 Innovation and trends", sub:flashCards("2.3").length+" cards", cards:function(){ return flashCards("2.3"); }}
+  ],
+  flashBlurb: DATA.flash.length + " check yourself cards: a question on the front, the answer on the back.",
+  refCard: {
+    title: "Formula card",
+    intro: "The formulas used in the number lab. Write the formula down before you touch the calculator.",
+    rows: (function(){ var seen = {}, out = [];
+      DATA.calcRounds.forEach(function(r){ r.items.forEach(function(x){ if (seen[x.formula]) return; seen[x.formula] = 1;
+        var p = x.formula.split(" = "); out.push([p[0].charAt(0).toUpperCase() + p[0].slice(1), p.slice(1).join(" = "), x.units[x.unit]]); }); });
+      return out; })(),
+    foot: "Change watts to kilowatts before working out kWh: 58 W is 0.058 kW. Change minutes to seconds before working out payback."
+  },
+  exit: {
+    blurb: "Five questions and a check of all eight goals. Five minutes.",
+    q1: "Name one advance from 2.2 and one emerging technology from 2.3. Give one consequence for each.",
+    mcq: [
+      {q:"In a composite, which part carries the load?", opts:["The matrix","The fibre","The mould","The release agent"], ans:1,
+        fb:"The fibre carries the load. The matrix holds the fibres and transfers load between them."},
+      {q:"What is the key difference between virtual reality and augmented reality?", opts:["Virtual reality needs the internet and augmented reality does not","Augmented reality replaces the real view and virtual reality adds to it","Virtual reality replaces the real view and augmented reality adds to it","There is no difference"], ans:2,
+        fb:"Replaces against adds. That one sentence answers the textbook question."},
+      {q:"A 2 mark answer says only: “Steel was made cheap in 1855.” What is missing?", opts:["The inventor's name","A named consequence","The exact month","Nothing, it gets both marks"], ans:1,
+        fb:"One mark for the development, one for the consequence, such as railways, bridges and tall buildings."},
+      {q:"In the circular economy, what happens at the end of a product's life?", opts:["It goes to landfill","It is burned","Its materials go back into use, with zero waste","It is stored on site"], ans:2,
+        fb:"The circular model has no end point. The linear model ends in disposal."}
+    ],
+    why: "Why does the design stage have the most influence on a product's sustainability? One sentence.",
+    rag: [
+      "Put the key advances in materials, power, lighting and engines in order.",
+      "Link an advance to transport, healthcare, housing, employment or sustainability.",
+      "Explain what the fibre and the matrix each do in a composite.",
+      "Work out lux per watt, energy in kWh and an annual running cost.",
+      "Name the right emerging technology from a real example.",
+      "Spot a wrong part in a definition and correct it.",
+      "Give a benefit and a drawback of the same technology.",
+      "Choose the right route for workshop waste, including hazardous waste."
+    ]
+  },
+  checkin: {
+    p1: {title:"Check-in: 2.2 significant advances", blurb:"Rate yourself on criterion 2.2.", lines:[
+      "Explain how materials developed, from the Bessemer process to Kevlar.",
+      "Explain what the fibre and the matrix each do in a composite.",
+      "Compare arc, incandescent, fluorescent and LED lamps.",
+      "Give three advantages of electric motors over line shafts.",
+      "Explain why interchangeable parts mattered for repair and for the assembly line.",
+      "Outline radio, television, automation and computing, with one consequence each."]},
+    p2: {title:"Check-in: 2.3 innovation and trends", blurb:"Rate yourself on criterion 2.3.", lines:[
+      "Define artificial intelligence, virtual reality, augmented reality and digitalisation.",
+      "Explain robotics, drones and autonomous systems, and the difference between automated and autonomous.",
+      "Explain distributed energy, hybrid systems, cyber physical systems, the internet of things and cloud computing.",
+      "Explain the product life cycle and the circular economy.",
+      "Apply the waste hierarchy, including hazardous waste.",
+      "Write about the future with careful, evidence based wording."]}
+  }
+};
+function flashCards(deck){ return DATA.flash.map(function(c, k){ return {id:"Q"+(k+1), term:c.term, def:c.def, deck:c.deck}; }).filter(function(c){ return !deck || c.deck === deck; }); }
+
+</script>
+<script>
+"use strict";
+/* ======================= nothing below here needs editing ================ */
+var VERSION = "2.1";
+
+/* ---------- small helpers ---------- */
+function $(s, el){ return (el||document).querySelector(s); }
+function $$(s, el){ return Array.prototype.slice.call((el||document).querySelectorAll(s)); }
+function esc(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+function shuffle(a){ a = a.slice(); for (var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function pick(a){ return a[Math.floor(Math.random()*a.length)]; }
+function uid(){ return (Date.now().toString(36) + Math.random().toString(36).slice(2,8)).toUpperCase(); }
+function todayKey(d){ d = d || new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function niceDate(d){ d = d ? new Date(d) : new Date(); return d.toLocaleDateString("en-GB",{day:"numeric",month:"short"}); }
+function say(msg){ var l=$("#live"); if(l){ l.textContent=""; setTimeout(function(){ l.textContent=msg; },30);} }
+function toast(msg){ var t=document.createElement("div"); t.className="toast"; t.setAttribute("role","status"); t.textContent=msg; document.body.appendChild(t); setTimeout(function(){ t.remove(); },2600); }
+var ICON = {
+  back:'<path d="M15 5l-7 7 7 7"/>',
+  games:'<rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/>',
+  record:'<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/>',
+  help:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.7M12 17h.01"/>',
+  exit:'<path d="M14 4h5v16h-5"/><path d="M10 8l-4 4 4 4M6 12h9"/>',
+  check:'<path d="M5 12l4 4 10-10"/>',
+  flash:'<rect x="4" y="7" width="13" height="12" rx="2"/><path d="M8 4h11a1 1 0 0 1 1 1v10"/>',
+  card:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M9 10v9"/>',
+  flame:'<path d="M12 3c1 3 5 5 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-9z"/>',
+  close:'<path d="M6 6l12 12M18 6L6 18"/>',
+  send:'<path d="M4 12l16-8-6 16-3-7z"/>',
+  copy:'<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/>',
+  chev:'<path d="M9 5l7 7-7 7"/>'
+};
+function icon(k){ return '<svg class="i" viewBox="0 0 24 24" aria-hidden="true">'+(ICON[k]||"")+'</svg>'; }
+
+/* ---------- storage that never throws (private browsing falls back to memory) ----------
+   Each hub keeps its own record. The hub code is shared across the hubs on this site,
+   so a learner who has signed in to one unit is already signed in to the next.        */
+var Store = (function(){
+  var mem = {}, ok = false, P = HUB_CONFIG.store + ".";
+  try { localStorage.setItem("__t","1"); localStorage.removeItem("__t"); ok = true; } catch(e) { ok = false; }
+  return {
+    get: function(k, d){ try{ var v = ok ? localStorage.getItem(P+k) : mem[k]; return v==null ? d : JSON.parse(v);}catch(e){ return d; } },
+    set: function(k, v){ var s = JSON.stringify(v); try{ if(ok) localStorage.setItem(P+k, s); else mem[k]=s; }catch(e){ mem[k]=s; } },
+    del: function(k){ try{ if(ok) localStorage.removeItem(P+k); delete mem[k]; }catch(e){} },
+    raw: function(k){ try{ return ok ? JSON.parse(localStorage.getItem(k)) : null; }catch(e){ return null; } },
+    rawSet: function(k, v){ try{ if(ok){ if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, JSON.stringify(v)); } }catch(e){} },
+    persistent: function(){ return ok; }
+  };
+})();
+var SHARED_ME = "tlhub.me";
+function rememberMe(me){ Store.set("me", me); Store.rawSet(SHARED_ME, me); }
+function findMe(){
+  var m = Store.get("me", null); if (m && m.code) return m;
+  var s = Store.raw(SHARED_ME) || Store.raw("u11hub.me");
+  return (s && /^[A-Z0-9]{4}$/.test(s.code || "")) ? s : null;
+}
+
+/* ---------- class list: "Name=CODE|Name=CODE" ---------- */
+var CLASS = String(CLASS_LIST||"").split("|").map(function(x){
+  var p = x.split("="); return {name:(p[0]||"").trim(), code:(p[1]||"").trim().toUpperCase()};
+}).filter(function(x){ return x.name && /^[A-Z0-9]{4}$/.test(x.code); });
+
+/* ---------- state ---------- */
+function freshProg(){ return {xp:0, best:{}, raw:{}, plays:{}, last:{}, stamps:{}, days:[], done:{}}; }
+var S = {
+  me: findMe(),
+  prog: null,
+  prefs: Store.get("prefs", null) || Store.raw("u11hub.prefs") || {theme:"auto", scale:1, motion:"auto"},
+  server: {state:"unknown", focus:null, target:null, week:null, message:"", nameOnly:false},
+  device: Store.get("device", null) || (function(){ var d=uid(); Store.set("device", d); return d; })(),
+  tab: "games"
+};
+function loadProg(){ var p = Store.get("prog."+(S.me?S.me.code:"none"), null); S.prog = Object.assign(freshProg(), p||{}); }
+function saveProg(){ if (S.me) Store.set("prog."+S.me.code, S.prog); }
+if (S.me) Store.set("me", S.me);
+loadProg();
+function applyPrefs(){
+  var r=document.documentElement;
+  if (S.prefs.theme==="auto") r.removeAttribute("data-theme"); else r.setAttribute("data-theme", S.prefs.theme);
+  r.style.setProperty("--scale", S.prefs.scale);
+  if (S.prefs.motion==="reduce") r.setAttribute("data-motion","reduce"); else r.removeAttribute("data-motion");
+}
+
+/* ---------- transport: Microsoft Forms (main route), Google Apps Script (optional), or this phone only ---------- */
+var Net = {
+  mode: function(){
+    if (window.google && google.script && google.script.run) return "gas";
+    if (HUB_CONFIG.endpoint) return "remote";
+    if (FORM_PREFILL) return "forms";
+    return "local";
+  },
+  call: function(action, payload){
+    var m = this.mode();
+    return new Promise(function(resolve, reject){
+      if (m === "gas") {
+        google.script.run.withSuccessHandler(resolve).withFailureHandler(reject).api(action, payload || {});
+      } else if (m === "remote") {
+        var ctrl = ("AbortController" in window) ? new AbortController() : null;
+        var timer = setTimeout(function(){ if(ctrl) ctrl.abort(); }, 15000);
+        fetch(HUB_CONFIG.endpoint, {method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"},
+          body: JSON.stringify(Object.assign({action:action}, payload||{})), signal: ctrl ? ctrl.signal : undefined})
+          .then(function(r){ return r.json(); }).then(function(j){ clearTimeout(timer); resolve(j); })
+          .catch(function(e){ clearTimeout(timer); reject(e); });
+      } else reject(new Error("no_server"));
+    });
+  }
+};
+var Sync = {
+  q: Store.get("queue", []), busy:false,
+  add: function(ev){ this.q.push(ev); Store.set("queue", this.q); this.flush(); },
+  flush: function(){
+    var self = this, m = Net.mode();
+    if (self.busy || !self.q.length || (m!=="gas" && m!=="remote")) return;
+    if (navigator.onLine === false) return;
+    self.busy = true;
+    var batch = self.q.slice(0, 25);
+    Net.call("log", {events: batch}).then(function(res){
+      if (res && res.ok) {
+        var sent = {}; batch.forEach(function(e){ sent[e.id]=1; });
+        self.q = self.q.filter(function(e){ return !sent[e.id]; }); Store.set("queue", self.q); S.server.state = "ok";
+      } else if (res && res.error === "unknown_code") {
+        var bad = S.me ? S.me.code : ""; self.q = self.q.filter(function(e){ return e.code !== bad; }); Store.set("queue", self.q);
+        toast("Your code was not recognised. Please sign in again."); signOut(true);
+      } else { S.server.state = "error"; }
+    }).catch(function(){ S.server.state = "offline"; }).then(function(){
+      self.busy = false; updateSyncLine();
+      if (self.q.length && S.server.state==="ok") setTimeout(function(){ self.flush(); }, 400);
+    });
+  }
+};
+window.addEventListener("online", function(){ Sync.flush(); });
+setInterval(function(){ Sync.flush(); }, 30000);
+function logEvent(type, game, data){
+  data = data || {};
+  var m = Net.mode(); if (m!=="gas" && m!=="remote") return null;
+  var ev = { id: uid(), t: new Date().toISOString(), code: S.me ? S.me.code : "", name: "", dev: S.device, type: type, game: game ? sentName(game) : "",
+    score: data.score == null ? "" : data.score, max: data.max == null ? "" : data.max, secs: data.secs == null ? "" : data.secs,
+    items: data.items || [], extra: data.extra ? JSON.stringify(data.extra) : "", v: VERSION };
+  Sync.add(ev); return ev;
+}
+function syncText(){
+  var m = Net.mode();
+  if (m==="forms") return "Your results reach your tutor when you press Send my result.";
+  if (m==="local") return "Your tutor has not linked this hub to a form yet. Copy your result instead.";
+  if (Sync.q.length) return Sync.q.length + " result" + (Sync.q.length>1?"s":"") + " waiting to send. They go as soon as you are online.";
+  return "All results sent to your tutor.";
+}
+function updateSyncLine(){ $$("[data-sync]").forEach(function(el){ el.textContent = syncText(); }); }
+
+/* ---------- the game name the tracker sees: unit prefix, a space, then the title ---------- */
+function sentName(title){ title = String(title||""); return /^\d/.test(title) ? title : HUB_CONFIG.prefix + " " + title; }
+
+/* ---------- verification code: short, and it changes if the code, game or score is edited ----------
+   The tracker works out the same number in Excel, so an edited score shows up there.   */
+function checkCode(code, game, score, max){
+  var s = String(code).toUpperCase()+"|"+sentName(game)+"|"+score+"|"+max, h = 0;
+  for (var k=0;k<s.length;k++) h += s.charCodeAt(k)*(k+1)*7;
+  h += 11*Number(score) + 13*Number(max);
+  return String(h % 9973).padStart(4,"0");
+}
+function formsLink(game, score, max, detail){
+  var u = FORM_PREFILL;
+  function rep(tok, val){ u = u.split(tok).join(encodeURIComponent(val)); }
+  rep("LEARNERHERE", S.me ? S.me.code : "");
+  rep("GAMEHERE", sentName(game)); rep("SCOREHERE", String(score)); rep("MAXHERE", String(max));
+  rep("CHECKHERE", checkCode(S.me ? S.me.code : "", game, score, max));
+  rep("DETAILHERE", String(detail||"").slice(0, 900));
+  return u;
+}
+function resultLine(game, score, max, when){
+  var code = S.me ? S.me.code : "";
+  return code + " | " + sentName(game) + " | " + score + " of " + max + " | check " + checkCode(code, game, score, max) + " | " + niceDate(when);
+}
+function copyText(text, done){
+  function fallback(){
+    var t = document.createElement("textarea"); t.value = text; t.setAttribute("readonly",""); t.style.position="fixed"; t.style.opacity="0";
+    document.body.appendChild(t); t.select(); var ok=false; try { ok = document.execCommand("copy"); } catch(e) {} t.remove(); done(ok);
+  }
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(function(){ done(true); }, fallback); else fallback();
+}
+
+/* ---------- drawings, made in code so the file needs no images ---------- */
+function svgWrap(vb, inner, label){ return '<svg viewBox="'+vb+'" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="'+esc(label||"")+'">'+inner+'</svg>'; }
+var COMMON_ART = {
+  quick: '<circle class="a-i" cx="80" cy="44" r="26"/><path class="a-i" d="M74 12h12M80 12v6"/><path class="a-a" d="M80 44l12-12"/><circle class="a-fa" cx="80" cy="44" r="3"/>',
+  flash: '<rect class="a-i" x="46" y="18" width="62" height="42" rx="6"/><rect class="a-f" x="56" y="26" width="62" height="42" rx="6"/><path class="a-a" d="M72 48h30"/>'
+};
+function tileArt(key){
+  if (UNIT.tileArt) { var own = UNIT.tileArt(key); if (own) return own; }
+  return svgWrap("0 0 160 80", (UNIT.TILE_ART && UNIT.TILE_ART[key]) || COMMON_ART[key] || COMMON_ART.quick, "");
+}
+
+/* ---------- the games, in the order they appear ---------- */
+var GAMES = UNIT.games;
+var TITLE = {flash:"Key word cards", exit:"Exit ticket"};
+GAMES.forEach(function(g){ TITLE[g.key] = g.title; });
+TITLE.checkin1 = UNIT.checkin.p1.title; TITLE.checkin2 = UNIT.checkin.p2.title;
+var LEVELS = [{name:"Apprentice",at:0},{name:"Engineering Technician",at:400},{name:"Incorporated Engineer",at:1000},{name:"Chartered Engineer",at:2000}];
+function levelOf(xp){ var i=0; while (i<LEVELS.length-1 && xp>=LEVELS[i+1].at) i++; return {i:i, name:LEVELS[i].name, next:LEVELS[i+1]||null, from:LEVELS[i].at}; }
+function streak(){
+  var d = S.prog.days.slice().sort(), n = 0, day = new Date();
+  if (d.indexOf(todayKey(day)) < 0) day.setDate(day.getDate()-1);
+  while (d.indexOf(todayKey(day)) >= 0) { n++; day.setDate(day.getDate()-1); }
+  return n;
+}
+function firstName(){ if (!S.me) return ""; var n = S.me.name || S.me.code; return n.split(" ")[0]; }
+function initials(){ var n = (S.me && (S.me.name || S.me.code)) || "?"; var p = n.trim().split(/\s+/); return (p[0][0] + (p[1] ? p[1][0] : (p[0][1]||""))).toUpperCase(); }
+
+/* ---------- screen frame ---------- */
+function fullHeader(){
+  return '<header class="hdr"><div class="kick">'+esc(HUB_CONFIG.kicker)+'</div><h1>'+esc(HUB_CONFIG.hubName)+'</h1><div class="sub">'+esc(HUB_CONFIG.unitLabel)+'</div></header><div class="rule"></div>';
+}
+function gameHeader(title, i, n){
+  var pct = n ? Math.round(100*i/n) : 100;
+  return '<header class="hdr compact"><button class="iconbtn" data-act="back" aria-label="Back to the games">'+icon("back")+'</button>'+
+    '<div class="t">'+esc(title)+'</div>'+(n ? '<div class="n">'+(i+1)+' of '+n+'</div>' : '')+'</header>'+
+    '<div class="pbar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+pct+'"><i style="width:'+pct+'%"></i></div>';
+}
+var inGame = false, stopTimers = [];
+function clearTimers(){ stopTimers.forEach(function(f){ try { f(); } catch(e){} }); stopTimers = []; }
+function screen(html, opts){
+  opts = opts || {};
+  clearTimers();
+  inGame = !!opts.game;
+  document.body.classList.toggle("playing", !!opts.game);
+  document.body.classList.toggle("out", !!opts.out);
+  var app = $("#app"); app.innerHTML = html;
+  if (!opts.keep) window.scrollTo(0, 0);
+  $$("#tabs button").forEach(function(b){ if (b.dataset.tab === opts.tab) b.setAttribute("aria-current","page"); else b.removeAttribute("aria-current"); });
+  var f = $(".qtext", app) || $("h1", app) || $("h2", app);
+  if (f && !opts.keep) { f.setAttribute("tabindex","-1"); try { f.focus({preventScroll:true}); } catch(e){} }
+  $$('[data-act="back"]', app).forEach(function(b){ b.onclick = function(){
+    if (inGame && !opts.done && !confirm("Leave this game? This round will not be saved.")) return;
+    home();
+  }; });
+}
+
+/* ---------- sign in ---------- */
+function signIn(msg){
+  var list = CLASS.length > 0;
+  screen(fullHeader() + '<div class="wrap stack">' +
+    '<div class="card stack"><h2 style="margin:0">Sign in</h2>' +
+    (list ? '<p class="muted" style="margin:0">Tap your name.</p><div class="names">' + CLASS.map(function(c,i){ return '<button data-i="'+i+'">'+esc(c.name)+'</button>'; }).join("") + '</div><p class="muted small" style="margin:6px 0 0">Name not there? Type your code instead.</p>' : '') +
+    '<label for="code"><b>Your hub code</b><br><span class="small muted">Four letters and numbers, on the slip from your tutor. It is the same code for every unit.</span></label>' +
+    '<input id="code" class="textin codebox" maxlength="4" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-describedby="err">' +
+    '<button class="btn amber block" id="go">Start</button>' +
+    '<p id="err" class="small" role="alert" style="color:var(--red);margin:0">' + esc(msg||"") + '</p></div>' +
+    '<div class="panel amber"><h3>Nothing here is marked</h3><p>These games are for practice. Your scores stay on this phone until you choose to send them to your tutor.</p></div>' +
+    '<p class="foot">Your tutor sees your code, your scores, what you write in the exit ticket and when you played, so they know what to go over again. Nothing else is collected.</p></div>', {out:true});
+  var inp = $("#code"), go = $("#go");
+  inp.addEventListener("input", function(){ inp.value = inp.value.toUpperCase().replace(/[^A-Z0-9]/g,""); });
+  inp.addEventListener("keydown", function(e){ if (e.key === "Enter") go.click(); });
+  function finish(code, name){
+    S.me = {code:code, name:name || code}; rememberMe(S.me); loadProg(); logEvent("open","hub"); home();
+  }
+  function tryCode(code, name){
+    if (!/^[A-Z0-9]{4}$/.test(code)) { $("#err").textContent = "Your code has four letters and numbers."; return; }
+    var m = Net.mode();
+    if (m === "gas" || m === "remote") {
+      go.disabled = true; go.textContent = "Checking";
+      Net.call("hello", {code:code}).then(function(r){
+        if (r && r.ok) finish(code, name || r.first);
+        else { go.disabled=false; go.textContent="Start"; $("#err").textContent = "That code is not on the list. Check your slip, or ask your tutor."; }
+      }).catch(function(){ go.disabled=false; go.textContent="Start"; $("#err").textContent = "Cannot reach the hub right now. Check your wifi or data and try again."; });
+      return;
+    }
+    if (CLASS.length && !name) {
+      var hit = CLASS.filter(function(c){ return c.code === code; })[0];
+      if (!hit) { $("#err").textContent = "That code is not on the list. Check your slip, or ask your tutor."; return; }
+      name = hit.name;
+    }
+    finish(code, name);
+  }
+  go.onclick = function(){ tryCode(inp.value.trim()); };
+  $$(".names button").forEach(function(b){ b.onclick = function(){ var c = CLASS[+b.dataset.i]; tryCode(c.code, c.name); }; });
+  if (!list) setTimeout(function(){ try { inp.focus(); } catch(e){} }, 60);
+}
+function signOut(silent){
+  if (!silent && !confirm("Sign out on this phone? Your record stays here for next time.")) return;
+  S.me = null; Store.del("me"); Store.rawSet(SHARED_ME, null); Store.rawSet("u11hub.me", null); loadProg(); signIn();
+}
+
+/* ---------- home ---------- */
+async function loadServer(){
+  var m = Net.mode(); if (m !== "gas" && m !== "remote") return;
+  try {
+    var r = await Net.call("stats", {});
+    if (r && r.ok) Object.assign(S.server, {state:"ok", focus:r.focus, target:r.target, week:r.week, message:r.message||"", nameOnly:!!r.nameOnly});
+  } catch(e) { S.server.state = "offline"; }
+}
+function home(){
+  if (!S.me) return signIn();
+  S.tab = "games";
+  var p = S.prog, lv = levelOf(p.xp), focus = S.server.focus || HUB_CONFIG.defaultFocus;
+  var toNext = lv.next ? lv.next.at - p.xp : 0, span = lv.next ? lv.next.at - lv.from : 1, fill = lv.next ? Math.round(100*(p.xp-lv.from)/span) : 100;
+  var checked = Object.keys(p.stamps).length, played = Object.keys(p.plays).reduce(function(a,k){ return a + p.plays[k]; }, 0);
+  function tile(g){
+    var best = p.best[g.key], n = p.plays[g.key]||0, isF = focus.indexOf(g.key) >= 0, good = best >= 80;
+    var rec = n ? "Best " + best + "%, played " + n + (n>1 ? " times" : " time") : "Not played yet";
+    return '<button class="tile" data-game="'+g.key+'" aria-label="'+esc(g.title+". "+g.what+" "+rec+(isF?". Set for this week":""))+'">' +
+      '<div class="art">'+tileArt(g.key)+'</div>' +
+      (good ? '<span class="tick" aria-hidden="true">'+icon("check")+'</span>' : '') +
+      '<div class="body">' + (isF ? '<span class="badge">This week</span>' : '') + '<span class="ttl">'+esc(g.title)+'</span><span class="what">'+esc(g.what)+'</span><span class="rec'+(good?' good':'')+'">'+rec+'</span></div></button>';
+  }
+  var order = GAMES.slice().sort(function(a,b){ return (focus.indexOf(b.key)>=0) - (focus.indexOf(a.key)>=0); });
+  var cls = (S.server.week != null && S.server.target) ?
+    '<div class="card"><div class="row" style="justify-content:space-between;align-items:baseline"><b style="color:var(--head)">Class total this week</b><span class="muted small">'+S.server.week+' of '+S.server.target+'</span></div>' +
+    '<div class="meter"><i style="width:'+Math.min(100, Math.round(100*S.server.week/S.server.target))+'%"></i></div><p class="small muted" style="margin:8px 0 0">Every game anyone in the group finishes counts towards this.</p></div>' : '';
+  function row(act, ic, title, sub, pill){
+    return '<button class="rowbtn" data-go="'+act+'"><span class="ic">'+icon(ic)+'</span><span class="tx"><b>'+esc(title)+'</b><span>'+esc(sub)+'</span></span>'+(pill||'<span aria-hidden="true" class="muted">'+icon("chev")+'</span>')+'</button>';
+  }
+  var done = p.done;
+  screen(fullHeader() + '<div class="wrap">' +
+    '<div class="card"><div class="me"><span class="avatar" aria-hidden="true">'+esc(initials())+'</span><div><h2>Hello, '+esc(firstName())+'</h2>' +
+    '<div class="lvl">'+esc(lv.name)+', '+p.xp+' points</div></div></div>' +
+    '<div class="meter" aria-hidden="true"><i style="width:'+fill+'%"></i></div>' +
+    '<div class="small muted" style="margin-top:6px">'+(lv.next ? toNext+' points to '+esc(lv.next.name) : 'Top level reached. Keep your scores sharp.')+'</div>' +
+    '<div class="chips"><span class="chip">'+icon("flame")+streak()+' day streak</span><span class="chip">'+icon("check")+checked+' checked</span><span class="chip">'+icon("games")+played+' played</span></div></div>' +
+    (S.server.message ? '<div class="panel amber" style="margin-top:12px"><p>'+esc(S.server.message)+'</p></div>' : '') +
+    (cls ? '<div style="margin-top:12px">'+cls+'</div>' : '') +
+    '<div class="sec"><h2>Games</h2>'+(UNIT.refCard ? '<button class="link" data-act="refcard">'+esc(UNIT.refCard.title)+'</button>' : '')+'</div>' +
+    '<div class="grid">' + order.map(tile).join("") + '</div>' +
+    '<div class="sec"><h2>After the lesson</h2></div><div class="rows">' +
+      row("exit", "exit", "Exit ticket", UNIT.exit.blurb, done.exit ? '<span class="pill">Handed in</span>' : '<span class="pill amber">To do</span>') +
+      row("checkin1", "check", "Part 1 check-in", UNIT.checkin.p1.blurb, done.checkin1 ? '<span class="pill">Sent</span>' : '') +
+      row("checkin2", "check", "Part 2 check-in", UNIT.checkin.p2.blurb, done.checkin2 ? '<span class="pill">Sent</span>' : '') +
+      row("flash", "flash", "Key word cards", UNIT.flashBlurb) +
+    '</div><p class="foot">This is formative. Nothing here is marked or graded. <span data-sync>'+esc(syncText())+'</span></p></div>', {tab:"games"});
+  $$(".tile").forEach(function(t){ t.onclick = function(){ startGame(t.dataset.game); }; });
+  $$("[data-go]").forEach(function(b){ b.onclick = function(){ var g=b.dataset.go;
+    if (g==="exit") runExit(); else if (g==="checkin1") runCheckin("p1","checkin1"); else if (g==="checkin2") runCheckin("p2","checkin2"); else startGame("flash"); }; });
+  var rc = $('[data-act="refcard"]'); if (rc) rc.onclick = function(){ openRefCard(); };
+}
+
+/* ---------- my record ---------- */
+var RECORD_KEYS = GAMES.map(function(g){ return g.key; }).concat(["flash","exit","checkin1","checkin2"]);
+function recordLines(){
+  var p = S.prog;
+  return RECORD_KEYS.filter(function(k){ return p.raw[k]; }).map(function(k){ return resultLine(TITLE[k], p.raw[k][0], p.raw[k][1], p.last[k]); });
+}
+function record(){
+  S.tab = "record";
+  var p = S.prog, mode = Net.mode(), tag = HUB_CONFIG.transfer + "-";
+  var played = RECORD_KEYS.filter(function(k){ return (p.plays[k]||0) > 0 || p.raw[k]; });
+  var notYet = RECORD_KEYS.filter(function(k){ return played.indexOf(k) < 0; });
+  var cards = played.map(function(k){
+    var r = p.raw[k], t = TITLE[k], n = p.plays[k]||1;
+    var meta = (r ? "Best " + r[0] + " of " + r[1] : "Best " + (p.best[k]||0) + "%") + ", played " + n + (n>1?" times":" time") + (p.last[k] ? ", last " + niceDate(p.last[k]) : "");
+    var send = (mode === "forms" && r) ? '<a class="btn small amber act" target="_blank" rel="noopener" href="'+esc(formsLink(t, r[0], r[1], "Sent from My record"))+'">'+icon("send")+'Send</a>' : '';
+    return '<div class="card recard"><b>'+esc(t)+'</b>'+send+'<span class="meta">'+esc(meta)+(r ? '. Check code <span class="code">'+checkCode(S.me.code, t, r[0], r[1])+'</span>' : '')+'</span></div>';
+  }).join("");
+  var lines = recordLines().join("\n");
+  screen(fullHeader() + '<div class="wrap">' +
+    '<div class="sec" style="margin-top:6px"><h2>My record</h2><span class="muted small">'+esc(S.me.name || S.me.code)+'</span></div>' +
+    (cards ? '<div class="stack">'+cards+'</div>' : '<div class="panel"><p>Nothing played yet. Your best score for each game appears here.</p></div>') +
+    (notYet.length ? '<p class="small muted" style="margin:14px 2px">Not played yet: '+notYet.map(function(k){ return esc(TITLE[k]); }).join(", ")+'.</p>' : '') +
+    '<div class="sec"><h2>Copy all my results</h2></div>' +
+    '<div class="card stack"><p style="margin:0">One line per game, with its check code. Paste it into the class chat if the form will not open.</p>' +
+    '<textarea class="copyline" id="block" readonly aria-label="All my results">'+esc(lines || "Nothing to copy yet.")+'</textarea>' +
+    '<button class="btn ghost block" id="copyAll">'+icon("copy")+'Copy the block</button></div>' +
+    '<div class="sec"><h2>Moving to another phone</h2></div>' +
+    '<div class="card stack"><p style="margin:0">Your record lives on this phone. To move it, copy your transfer code here, then paste it on the other phone and press Bring it across.</p>' +
+    '<button class="btn ghost block" id="pack">'+icon("copy")+'Copy my transfer code</button>' +
+    '<label for="unpack"><b>Coming from another phone? Paste the code here</b></label><textarea class="textin" id="unpack" placeholder="'+esc(tag)+'..."></textarea>' +
+    '<button class="btn block" id="bring">Bring it across</button><p class="small" id="mUnpack" role="status" style="margin:0"></p></div>' +
+    '<p class="foot">Clearing your browser data clears this record. Send your results first.</p></div>', {tab:"record"});
+  $("#copyAll").onclick = function(){ copyText(lines, function(ok){ toast(ok ? "Copied. Paste it into the class chat." : "Select the text and copy it."); }); };
+  $("#pack").onclick = function(){
+    var code = tag + btoa(unescape(encodeURIComponent(JSON.stringify({me:S.me, prog:S.prog}))));
+    copyText(code, function(ok){ toast(ok ? "Transfer code copied." : "Could not copy. Try again."); });
+  };
+  $("#bring").onclick = function(){
+    var v = $("#unpack").value.trim(), msg = $("#mUnpack");
+    try {
+      if (v.indexOf(tag) !== 0) throw 0;
+      var d = JSON.parse(decodeURIComponent(escape(atob(v.slice(tag.length)))));
+      if (!d.me || !d.prog) throw 0;
+      var cur = S.prog, inc = Object.assign(freshProg(), d.prog);
+      cur.xp = Math.max(cur.xp, inc.xp);
+      Object.keys(inc.best).forEach(function(k){ if ((inc.best[k]||0) > (cur.best[k]||-1)) { cur.best[k] = inc.best[k]; if (inc.raw[k]) cur.raw[k] = inc.raw[k]; } });
+      Object.keys(inc.plays).forEach(function(k){ cur.plays[k] = Math.max(cur.plays[k]||0, inc.plays[k]); });
+      Object.keys(inc.last).forEach(function(k){ if (!cur.last[k] || inc.last[k] > cur.last[k]) cur.last[k] = inc.last[k]; });
+      Object.assign(cur.stamps, inc.stamps); Object.assign(cur.done, inc.done);
+      inc.days.forEach(function(x){ if (cur.days.indexOf(x) < 0) cur.days.push(x); });
+      saveProg(); toast("Record brought across."); record();
+    } catch(e) { msg.style.color = "var(--red)"; msg.textContent = "That does not look like a transfer code for this unit. Copy it again on the other phone."; }
+  };
+}
+
+/* ---------- help and settings ---------- */
+function help(){
+  S.tab = "help";
+  var P = S.prefs;
+  function seg(name, opts, cur){ return '<div class="seg" role="group" aria-label="'+esc(name)+'" style="grid-template-columns:repeat('+opts.length+',1fr)">' +
+    opts.map(function(o){ return '<button data-pref="'+name+'" data-v="'+o[0]+'" aria-pressed="'+(String(cur)===String(o[0]))+'">'+o[1]+'</button>'; }).join("") + '</div>'; }
+  screen(fullHeader() + '<div class="wrap">' +
+    '<div class="sec" style="margin-top:6px"><h2>How it works</h2></div>' +
+    '<div class="card stack"><p style="margin:0">Play any game as often as you like. Your best score and the number of times you played are kept on this phone.</p>' +
+    '<p style="margin:0" data-sync>'+esc(syncText())+'</p>' +
+    '<p style="margin:0">Keyboard: press 1, 2, 3 or 4 to answer and Enter to move on.</p>' +
+    (UNIT.refCard ? '<button class="btn ghost block" data-act="refcard">Open the '+esc(UNIT.refCard.title.toLowerCase())+'</button>' : '') + '</div>' +
+    '<div class="sec"><h2>Put the hub on your home screen</h2></div>' +
+    '<div class="card stack"><p style="margin:0"><b>iPhone:</b> in Safari, tap the Share button, then Add to Home Screen.</p>' +
+    '<p style="margin:0"><b>Android:</b> in Chrome, tap the three dots, then Add to home screen.</p>' +
+    '<p class="small muted" style="margin:0">It then opens like an app. On an iPhone it also stops your record being cleared if you have not played for a week or so.</p></div>' +
+    '<div class="sec"><h2>Colours and text</h2></div><div class="card">' +
+    '<b style="color:var(--head)">Colours</b>' + seg("theme", [["auto","Auto"],["light","Light"],["dark","Dark"],["cream","Cream"]], P.theme) +
+    '<p class="small muted" style="margin:-6px 0 12px">Cream uses a softer background and wider spacing, which many people find easier to read.</p>' +
+    '<b style="color:var(--head)">Text size</b>' + seg("scale", [[1,"Normal"],[1.15,"Large"],[1.3,"Largest"]], P.scale) +
+    '<b style="color:var(--head)">Movement</b>' + seg("motion", [["auto","Normal"],["reduce","Reduced"]], P.motion) + '</div>' +
+    '<div style="margin-top:16px"><a class="btn ghost block" href="./">All unit hubs</a></div>' +
+    '<div style="margin-top:10px"><button class="btn ghost block" id="out">Sign out on this phone</button></div>' +
+    '<p class="foot">'+esc(HUB_CONFIG.hubName)+', version '+VERSION+'. This is formative. Nothing here is marked or graded.</p></div>', {tab:"help"});
+  $$("[data-pref]").forEach(function(b){ b.onclick = function(){
+    var k = b.dataset.pref, v = b.dataset.v; S.prefs[k] = (k === "scale") ? Number(v) : v; Store.set("prefs", S.prefs); applyPrefs(); help();
+    var again = $('[data-pref="'+k+'"][data-v="'+v+'"]'); if (again) again.focus();
+  }; });
+  var rc = $('[data-act="refcard"]'); if (rc) rc.onclick = function(){ openRefCard(); };
+  $("#out").onclick = function(){ signOut(); };
+}
+
+/* ---------- formula card ---------- */
+function openRefCard(){
+  var R = UNIT.refCard;
+  var old = $(".modal"); if (old) old.remove();
+  var m = document.createElement("div"); m.className = "modal"; m.setAttribute("role","dialog"); m.setAttribute("aria-modal","true"); m.setAttribute("aria-label", R.title);
+  m.innerHTML = '<div class="sheet stack"><div class="row" style="justify-content:space-between;align-items:center;flex-wrap:nowrap"><h2 style="margin:0">'+esc(R.title)+'</h2>' +
+    '<button class="iconbtn plain" data-close aria-label="Close">'+icon("close")+'</button></div>' +
+    (R.intro ? '<p class="small" style="margin:0">'+esc(R.intro)+'</p>' : '') +
+    '<div style="overflow-x:auto"><table class="dtable ftable"><caption class="sr">'+esc(R.title)+'</caption>' +
+    '<thead><tr><th scope="col">To find</th><th scope="col">Use</th><th scope="col">Unit</th></tr></thead><tbody>' +
+    R.rows.map(function(r){ return '<tr><th scope="row">'+esc(r[0])+'</th><td>'+esc(r[1])+'</td><td>'+esc(r[2])+'</td></tr>'; }).join("") +
+    '</tbody></table></div>' + (R.foot ? '<p class="small muted" style="margin:0">'+esc(R.foot)+'</p>' : '') + '</div>';
+  document.body.appendChild(m);
+  function close(){ m.remove(); document.removeEventListener("keydown", onKey); }
+  function onKey(e){ if (e.key === "Escape") close(); }
+  document.addEventListener("keydown", onKey);
+  m.addEventListener("click", function(e){ if (e.target === m) close(); });
+  $("[data-close]", m).onclick = close;
+  $("[data-close]", m).focus();
+}
+
+/* ---------- navigation ---------- */
+function startGame(key){
+  if (key === "quick") return runQuick();
+  if (key === "flash") return UNIT.flashDecks ? chooseRound("flash", UNIT.flashDecks.map(function(d){ return {title:d.title, sub:d.sub}; }), function(i){ runFlash(UNIT.flashDecks[i].cards()); }) : runFlash(UNIT.flash);
+  var g = GAMES.filter(function(x){ return x.key === key; })[0];
+  if (g && g.run) g.run(key);
+}
+document.addEventListener("keydown", function(e){
+  var t = e.target, tag = (t && t.tagName) || "";
+  if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || e.metaKey || e.ctrlKey || e.altKey) return;
+  if (/^[1-9]$/.test(e.key)) {
+    var b = $$(".opt:not([disabled]), .chunk:not([disabled]), [data-ans]:not([disabled])")[Number(e.key)-1];
+    if (b) { e.preventDefault(); b.click(); }
+  } else if (e.key === "Enter" && tag !== "BUTTON" && tag !== "A") {
+    var n = $("#next"); if (n) { e.preventDefault(); n.click(); }
+  }
+});
+
+/* ---------- pick a round before playing ---------- */
+function chooseRound(key, rounds, go){
+  screen(gameHeader(TITLE[key], 0, 0) + '<div class="wrap"><div class="card"><p class="qtext" style="margin-top:0">Pick a round</p>' +
+    '<p class="qprompt" style="margin-top:0">Each round is scored on its own. Your best score counts.</p><div class="rows">' +
+    rounds.map(function(r, i){ return '<button class="rowbtn" data-r="'+i+'"><span class="tx"><b>'+esc(r.title)+'</b>'+(r.sub ? '<span>'+esc(r.sub)+'</span>' : '')+'</span><span aria-hidden="true" class="muted">'+icon("chev")+'</span></button>'; }).join("") +
+    '</div></div></div>', {game:true, done:true});
+  $$("[data-r]").forEach(function(b){ b.onclick = function(){ go(+b.dataset.r); }; });
+}
+
+/* ---------- results ---------- */
+function resultMessage(pct){
+  if (pct >= 90) return "Excellent. That is exam ready.";
+  if (pct >= 70) return "Good work. Check the ones below, then go again.";
+  if (pct >= 40) return "Getting there. Read the fixes, then play it again.";
+  return "Early days. Read each fix below and try again. It gets easier every round.";
+}
+function sendPanel(title, score, max, detail){
+  var m = Net.mode(), code = S.me ? S.me.code : "", chk = checkCode(code, title, score, max);
+  if (m === "forms") return '<div class="panel amber stack" style="margin-top:12px"><h3>Send this to your tutor</h3>' +
+    '<p>One tap opens the form with your code, the game and your score already filled in. Press Submit on the form.</p>' +
+    '<p>Check code <span class="code">'+chk+'</span></p>' +
+    '<div class="row"><a class="btn amber" id="send" target="_blank" rel="noopener" href="'+esc(formsLink(title, score, max, detail))+'">'+icon("send")+'Send my result</a>' +
+    '<button class="btn ghost" id="copy1">'+icon("copy")+'Copy it instead</button></div></div>';
+  if (m === "local") return '<div class="panel amber stack" style="margin-top:12px"><h3>Keep a copy</h3>' +
+    '<p>This hub is not linked to your tutor&#39;s form yet. Copy this line and paste it where your tutor asks.</p>' +
+    '<p class="small"><b>'+esc(resultLine(title, score, max))+'</b></p><button class="btn ghost" id="copy1">'+icon("copy")+'Copy it</button></div>';
+  return '<p class="small muted" style="margin:12px 2px" data-sync>'+esc(syncText())+'</p>';
+}
+function wireSend(title, score, max){
+  var c = $("#copy1"); if (c) c.onclick = function(){ copyText(resultLine(title, score, max), function(ok){ toast(ok ? "Copied. Paste it into the class chat." : "Select the line and copy it."); }); };
+  var s = $("#send"); if (s) s.addEventListener("click", function(){ toast("The form is opening. Press Submit on it."); });
+}
+function finishGame(key, score, max, items, started, review, extra){
+  extra = extra || {};
+  var p = S.prog, title = TITLE[key], pct = max ? Math.round(100*score/max) : 0, secs = Math.round((Date.now()-started)/1000);
+  var prev = p.best[key], newBest = prev == null || pct > prev;
+  if (newBest) { p.best[key] = pct; p.raw[key] = [score, max]; }
+  p.plays[key] = (p.plays[key]||0) + 1; p.last[key] = new Date().toISOString();
+  var gain = 20 + score*10 + (extra.bonus||0); p.xp += gain;
+  var stamp = pct >= 80, firstStamp = stamp && !p.stamps[key]; if (stamp) p.stamps[key] = true;
+  var t = todayKey(); if (p.days.indexOf(t) < 0) p.days.push(t);
+  saveProg();
+  logEvent("finish", title, {score:score, max:max, secs:secs, items:items});
+  var missed = items.filter(function(x){ return !x.ok; }).map(function(x){ return x.l; });
+  var detail = (extra.round ? extra.round + ". " : "") + (missed.length ? "To go over: " + missed.slice(0,6).join("; ") : "All correct");
+  screen(gameHeader(title, 0, 0) + '<div class="wrap">' +
+    '<div class="card result"><p class="muted" style="margin:0 0 4px">'+esc(title)+(extra.round ? ', '+esc(extra.round) : '')+'</p><div class="big">'+score+'<small> of '+max+'</small></div>' +
+    '<p style="margin:10px 0 4px">'+resultMessage(pct)+'</p><p class="small muted" style="margin:0">+'+gain+' points'+(newBest && prev != null ? ', a new best' : '')+'</p>' +
+    (stamp ? '<span class="seal'+(firstStamp?' pop':'')+'">'+icon("check")+'Checked</span>' : '') + '</div>' +
+    sendPanel(title, score, max, detail) +
+    (review.length ? '<div class="card" style="margin-top:12px"><h3 style="margin:0 0 6px">What to fix</h3><ol class="review">' +
+      review.map(function(r){ return '<li><b>'+esc(r.q)+'</b><br>The answer: '+esc(r.right)+(r.why ? '. <span class="muted">'+esc(r.why)+'</span>' : '')+'</li>'; }).join("") + '</ol></div>'
+      : '<div class="panel" style="margin-top:12px"><p>Nothing to fix this round.</p></div>') +
+    '<div class="dock"><div class="row"><button class="btn amber" id="again">Play again</button><button class="btn ghost" id="hub">Back to the games</button></div></div></div>', {game:true, done:true});
+  wireSend(title, score, max);
+  $("#again").onclick = function(){ startGame(key); };
+  $("#hub").onclick = function(){ home(); };
+  say(score + " out of " + max + ". " + resultMessage(pct));
+}
+
+/* ---------- one engine for every multiple choice game ---------- */
+function optButtons(opts){ return opts.map(function(o,k){ return '<button class="opt" data-k="'+k+'"><span class="k">'+(k+1)+'</span><span class="l">'+esc(o)+'</span><span class="s"></span></button>'; }).join(""); }
+function markOpts(correct, chosen){
+  var ok = correct.indexOf(chosen) >= 0;
+  $$(".opt").forEach(function(b){
+    var j = +b.dataset.k; b.disabled = true;
+    if (correct.indexOf(j) >= 0) { b.classList.add("correct"); $(".s", b).textContent = (j === chosen || !ok) ? "Right answer" : "Also right"; }
+    else if (j === chosen) { b.classList.add("wrong"); $(".s", b).textContent = "Not this one"; }
+    else b.classList.add("dim");
+  });
+  return ok;
+}
+function showFeedback(ok, rightText, why, nextLabel, onNext){
+  var fb = $("#fb");
+  fb.className = "fb" + (ok ? "" : " bad");
+  fb.innerHTML = '<strong>' + (ok ? pick(["Right.","Yes, that is it.","Correct."]) : "Not this time.") + '</strong>' +
+    (ok ? "" : "The answer is: " + esc(rightText) + ". ") + esc(why || "");
+  $("#dock").innerHTML = '<button class="btn amber block" id="next">'+nextLabel+'</button>';
+  $("#next").onclick = onNext;
+  say(ok ? "Right." : "Not this time. The answer is " + rightText);
+  try { fb.scrollIntoView({block:"nearest", behavior:"smooth"}); } catch(e) {}
+}
+function runMCQ(key, items, opts){
+  opts = opts || {};
+  var i = 0, score = 0, bonus = 0, log = [], review = [], started = Date.now(), shownAt = 0;
+  function show(){
+    var it = items[i];
+    screen(gameHeader(TITLE[key], i, items.length) + '<div class="wrap"><div class="card">' +
+      '<div class="qno">'+(opts.label || "Question")+' '+(i+1)+'</div>' +
+      (it.lead ? '<p class="qprompt" style="margin:4px 0 0">'+esc(it.lead)+'</p>' : '') +
+      '<p class="qtext">'+esc(it.prompt)+'</p>' +
+      (it.art ? '<div class="qart">'+it.art+'</div>' : '') +
+      (it.sub ? '<p class="qprompt">'+esc(it.sub)+'</p>' : '') +
+      '<div class="opts'+((opts.cols === 2 || it.cols === 2) ? ' two' : '')+'">' + optButtons(it.options) + '</div>' +
+      '<div id="fb" role="status"></div></div><div class="dock" id="dock"></div></div>', {game:true});
+    shownAt = Date.now();
+    $$(".opt").forEach(function(b){ b.onclick = function(){ answer(+b.dataset.k); }; });
+  }
+  function answer(k){
+    var it = items[i], ok = markOpts(it.correct, k), right = it.correct.map(function(c){ return it.options[c]; }).join(" or ");
+    if (ok) { score++; if (opts.speed && Date.now() - shownAt < 6000) bonus += 5; }
+    else review.push({q:it.label || it.prompt, right:right, why:it.why});
+    log.push({i:it.id, ok:ok?1:0, l:String(it.label || it.prompt).slice(0,90)});
+    var last = i === items.length - 1;
+    showFeedback(ok, right, it.why, last ? "See my score" : "Next", function(){ if (last) finishGame(key, score, items.length, log, started, review, {bonus:bonus}); else { i++; show(); } });
+  }
+  show();
+}
+function mix(correct, wrongs){ var o = shuffle([correct].concat(wrongs)); return {options:o, correct:[o.indexOf(correct)]}; }
+function runQuick(){
+  var pool = [];
+  GAMES.forEach(function(g){ if (g.mcq) pool = pool.concat(g.mcq().map(function(x){ return Object.assign({}, x, {label: x.label || x.prompt}); })); });
+  runMCQ("quick", shuffle(pool).slice(0,10), {speed:true});
+}
+
+/* ---------- step by step: a case, then two or three picks in order ---------- */
+function runSteps(key, cases, opts){
+  opts = opts || {};
+  var items = cases, i = 0, s = 0, score = 0, max = 0, log = [], review = [], started = Date.now();
+  items.forEach(function(c){ max += c.steps.length; });
+  var done = 0;
+  function show(){
+    var it = items[i], st = it.steps[s], m = mix(st.correct, st.wrongs), n = it.steps.length;
+    screen(gameHeader(TITLE[key], done, max) + '<div class="wrap"><div class="card">' +
+      '<div class="qno">'+(opts.label || "Case")+' '+(i+1)+' of '+items.length+'. Step '+(s+1)+' of '+n+'</div>' +
+      '<p class="qtext">'+esc(it.q)+'</p>' +
+      it.steps.slice(0, s).map(function(p){ return '<div class="stepnote"><b>'+esc(p.label)+':</b> '+esc(p.correct)+'</div>'; }).join("") +
+      '<p class="qprompt"><b style="color:var(--head)">'+esc(st.label)+'</b></p>' +
+      '<div class="opts">'+optButtons(m.options)+'</div><div id="fb" role="status"></div></div><div class="dock" id="dock"></div></div>', {game:true});
+    $$(".opt").forEach(function(b){ b.onclick = function(){
+      var ok = markOpts(m.correct, +b.dataset.k);
+      if (ok) score++; else review.push({q:it.q + " (" + st.label.toLowerCase() + ")", right:st.correct, why:""});
+      log.push({i:(it.id||("C"+(i+1)))+"-"+(s+1), ok:ok?1:0, l:(st.label+": "+it.q).slice(0,90)});
+      done++;
+      var lastStep = s === n-1, last = i === items.length-1 && lastStep;
+      showFeedback(ok, st.correct, "", !lastStep ? "Next step" : (last ? "See my score" : "Next "+(opts.label || "case").toLowerCase()), function(){
+        if (last) return finishGame(key, score, max, log, started, review);
+        if (!lastStep) s++; else { s = 0; i++; } show();
+      });
+    }; });
+  }
+  show();
+}
+
+/* ---------- spot the error: tap the part that is wrong ---------- */
+function runErrors(key, items, opts){
+  opts = opts || {};
+  var i = 0, score = 0, log = [], review = [], started = Date.now();
+  function show(){
+    var it = items[i];
+    screen(gameHeader(TITLE[key], i, items.length) + '<div class="wrap"><div class="card">' +
+      '<div class="qno">'+(opts.label || "Statement")+' '+(i+1)+'</div>' +
+      (it.title ? '<p class="qtext">'+esc(it.title)+'</p>' : '') +
+      '<p class="qprompt" style="margin:4px 0 12px">'+esc(opts.ask || "One part of this statement is wrong. Tap it.")+'</p>' +
+      '<div class="chunks'+(opts.lines ? ' lines' : '')+'">' + it.chunks.map(function(c,k){ return '<button class="chunk" data-k="'+k+'">'+esc(c)+'</button>'; }).join("") + '</div>' +
+      '<div id="fb" role="status"></div></div><div class="dock" id="dock"></div></div>', {game:true});
+    $$(".chunk").forEach(function(b){ b.onclick = function(){
+      var k = +b.dataset.k, ok = k === it.wrong;
+      $$(".chunk").forEach(function(c){ var j = +c.dataset.k; c.disabled = true;
+        if (j === it.wrong) c.classList.add("is-error"); else if (j === k) c.classList.add("wrong-pick"); else c.classList.add("fine"); });
+      if (ok) score++; else review.push({q:it.title || it.chunks.join(" "), right:"the wrong part is “"+it.chunks[it.wrong]+"”", why:it.fix});
+      log.push({i:it.id, ok:ok?1:0, l:(it.title || it.chunks.join(" ")).slice(0,90)});
+      var fb = $("#fb"); fb.className = "fb" + (ok ? "" : " bad");
+      fb.innerHTML = '<strong>'+(ok ? "Spotted it." : "Not that part. The wrong part is outlined in red.")+'</strong>'+esc(it.fix) +
+        (it.fixLines && it.fixLines.length ? '<div class="worked"><b>Put right:</b><ol>'+it.fixLines.map(function(w){ return '<li>'+esc(w)+'</li>'; }).join("")+'</ol></div>' : '');
+      var last = i === items.length-1;
+      $("#dock").innerHTML = '<button class="btn amber block" id="next">'+(last ? "See my score" : "Next")+'</button>';
+      $("#next").onclick = function(){ if (last) finishGame(key, score, items.length, log, started, review); else { i++; show(); } };
+      try { fb.scrollIntoView({block:"nearest", behavior:"smooth"}); } catch(e) {}
+    }; });
+  }
+  show();
+}
+
+/* ---------- put it in order: tap the steps in order, one mark per step in the right place ----------
+   A set is {id, title, lead, steps:[{t, tag, note}], why}. Tags (dates, 1st, 2nd) show only after checking. */
+function runOrder(key, set, opts){
+  opts = opts || {};
+  var it = set, n = it.steps.length, score = 0, log = [], review = [], started = Date.now();
+  var pool = shuffle(it.steps.map(function(_,k){ return k; })), placed = [], checked = false;
+  if (n > 2) { var guard = 0; while (pool.every(function(v,k){ return v === k; }) && guard++ < 9) pool = shuffle(pool); }
+  function draw(keepScroll){
+    var left = pool.filter(function(k){ return placed.indexOf(k) < 0; });
+    screen(gameHeader(TITLE[key], 0, 0) + '<div class="wrap"><div class="card">' +
+      '<div class="qno">'+esc(opts.round || "Sequence")+'</div><p class="qtext">'+esc(it.title)+'</p>' +
+      '<p class="qprompt">'+esc(it.lead ? it.lead + " " : "")+'Tap the items in order. Tap a numbered one to send it back.</p>' +
+      '<div class="pool">' + (left.length ? left.map(function(k){ return '<button class="chip2" data-step="'+k+'">'+esc(it.steps[k].t)+'</button>'; }).join("") : '<span class="small muted">All placed.</span>') + '</div>' +
+      '<div class="slots">' + it.steps.map(function(_,k){ var v = placed[k];
+        var cls = v == null ? "" : (checked ? (v === k ? " filled ok" : " filled no") : " filled");
+        return '<button class="slot'+cls+'" data-slot="'+k+'" '+((v == null || checked) ? "disabled" : "")+' aria-label="Place '+(k+1)+(v == null ? ", empty" : ": "+esc(it.steps[v].t))+'"><b>'+(k+1)+'</b><span>'+(v == null ? '<span class="muted small">empty</span>' : esc(it.steps[v].t))+'</span></button>'; }).join("") + '</div>' +
+      '<div id="fb" role="status"></div></div><div class="dock" id="dock"></div></div>', {game:true, keep:!!keepScroll});
+    $$(".chip2").forEach(function(b){ b.onclick = function(){ if (checked) return; var free = -1; for (var k=0;k<n;k++){ if (placed[k] == null) { free = k; break; } }
+      if (free >= 0) { placed[free] = +b.dataset.step; draw(true); } }; });
+    $$(".slot").forEach(function(b){ b.onclick = function(){ if (checked) return; placed[+b.dataset.slot] = null; draw(true); }; });
+    var full = placed.filter(function(v){ return v != null; }).length === n;
+    if (checked) {
+      var fb = $("#fb"); fb.className = "fb" + (score === n ? "" : " bad");
+      fb.innerHTML = '<strong>'+score+' of '+n+' in the right place.</strong>The order: <ol>'+it.steps.map(function(s){ return '<li>'+(s.tag ? '<b>'+esc(s.tag)+'</b> ' : '')+esc(s.t)+(s.note ? '. <span class="muted">'+esc(s.note)+'</span>' : '')+'</li>'; }).join("")+'</ol>'+esc(it.why||"");
+      $("#dock").innerHTML = '<button class="btn amber block" id="next">See my score</button>';
+      $("#next").onclick = function(){ finishGame(key, score, n, log, started, review, {round:opts.round}); };
+    } else {
+      $("#dock").innerHTML = '<button class="btn amber block" id="chk" '+(full ? "" : "disabled")+'>'+(full ? "Check my order" : "Place every item first")+'</button>';
+      $("#chk").onclick = function(){
+        checked = true;
+        for (var k=0;k<n;k++){ var ok = placed[k] === k; if (ok) score++; log.push({i:it.id+"-"+(k+1), ok:ok?1:0, l:(it.title+": place "+(k+1)+", "+it.steps[k].t).slice(0,90)}); }
+        if (score < n) review.push({q:it.title, right:it.steps.map(function(s){ return (s.tag ? s.tag+" " : "")+s.t; }).join(", "), why:it.why||""});
+        draw(true);
+      };
+    }
+  }
+  draw(false);
+}
+
+/* ---------- key word cards: look, think, flip, be honest ---------- */
+function runFlash(cards){
+  var queue = shuffle(cards).map(function(c){ return Object.assign({n:0}, c); }), total = queue.length, firstGo = 0, log = [], started = Date.now();
+  function show(){
+    if (!queue.length) return finishGame("flash", firstGo, total, log, started,
+      log.filter(function(x){ return !x.ok; }).map(function(x){ var c = cards.filter(function(f){ return f.id === x.i; })[0] || {}; return {q:x.l, right:c.def||"", why:""}; }));
+    var c = queue[0], known = total - queue.length;
+    screen(gameHeader(TITLE.flash, known, total) + '<div class="wrap">' +
+      '<p class="qprompt" style="margin:0 0 6px">Say the meaning out loud, then turn the card over.</p>' +
+      '<button class="flip" id="fc" aria-label="'+esc(c.term)+'. Tap to turn over."><span class="inner"><span class="face front"><strong>'+esc(c.term)+'</strong><span class="small muted" style="margin-top:10px">Tap to turn over</span></span>' +
+      '<span class="face back"><span>'+esc(c.def)+'</span></span></span></button>' +
+      '<div class="dock" id="dock"><div class="row"><button class="btn ghost" id="no" disabled>Not yet</button><button class="btn" id="yes" disabled>I knew that</button></div>' +
+      '<button class="link" id="stop" style="width:100%">Stop here and see my score</button></div></div>', {game:true});
+    var fc = $("#fc");
+    fc.onclick = function(){ fc.classList.toggle("on"); $("#yes").disabled = false; $("#no").disabled = false; fc.setAttribute("aria-label", fc.classList.contains("on") ? c.def : c.term); };
+    $("#yes").onclick = function(){ if (c.n === 0) { firstGo++; log.push({i:c.id, ok:1, l:c.term}); } queue.shift(); show(); };
+    $("#no").onclick = function(){ if (c.n === 0) log.push({i:c.id, ok:0, l:c.term}); c.n++; queue.shift(); if (c.n < 3) queue.push(c); show(); };
+    $("#stop").onclick = function(){ queue.forEach(function(q){ if (q.n === 0) log.push({i:q.id, ok:0, l:q.term}); }); queue = []; show(); };
+  }
+  show();
+}
+
+/* ---------- calculation clinic: type the number, pick the unit, a second go with the formula ---------- */
+function parseNum(s){
+  var t = String(s).replace(/[,£\s]/g, "").replace(/per cent|%/gi, "");
+  if (!t || isNaN(Number(t))) return null;
+  return Number(t);
+}
+function fmtNum(v, dp){ return Number(v).toLocaleString("en-GB", {minimumFractionDigits:dp, maximumFractionDigits:dp}); }
+function runCalc(key, round){
+  var items = round.items, i = 0, score = 0, log = [], review = [], started = Date.now();
+  function show(){
+    if (i >= items.length) return finishGame(key, score, items.length, log, started, review, {round:round.title});
+    var it = items[i], tries = 0, unit = null;
+    screen(gameHeader(TITLE[key], i, items.length) + '<div class="wrap"><div class="card">' +
+      '<div class="rungs" aria-hidden="true">' + items.map(function(_,k){ return '<i class="'+(k<i ? (log[k] && log[k].ok ? "done" : "miss") : (k===i ? "now" : ""))+'"></i>'; }).join("") + '</div>' +
+      '<div class="qno">Question '+(i+1)+'</div><p class="qtext">'+esc(it.q)+'</p>' +
+      '<div class="worked" style="margin:0 0 12px"><b>Formula:</b> '+esc(it.formula)+'</div>' +
+      '<div class="numrow"><label class="sr" for="ans">Your answer as a number</label>' +
+      '<input id="ans" class="textin" inputmode="decimal" autocomplete="off" enterkeyhint="done" placeholder="Your answer"></div>' +
+      '<p class="qprompt" style="margin:12px 0 4px"><b style="color:var(--head)">Pick the unit</b></p>' +
+      '<div class="seg" role="group" aria-label="Pick the unit" style="grid-template-columns:repeat(2,1fr)">' +
+      it.units.map(function(u,k){ return '<button data-u="'+k+'" aria-pressed="false">'+esc(u)+'</button>'; }).join("") + '</div>' +
+      '<p class="small muted" style="margin:0">'+esc(round.rule || "Money to the nearest penny. Everything else to two decimal places unless the question says otherwise.")+'</p>' +
+      '<div id="fb" role="status"></div></div>' +
+      '<div class="dock" id="dock"><button class="btn amber block" id="chk">Check</button></div></div>', {game:true});
+    var inp = $("#ans");
+    inp.addEventListener("keydown", function(e){ if (e.key === "Enter") { e.preventDefault(); var b = $("#chk") || $("#next"); if (b) b.click(); } });
+    $$("[data-u]").forEach(function(b){ b.onclick = function(){ if (b.disabled) return; unit = +b.dataset.u; $$("[data-u]").forEach(function(x){ x.setAttribute("aria-pressed", String(x === b)); }); }; });
+    var answerText = fmtNum(it.answer, it.dp) + " " + it.units[it.unit];
+    function done(ok){
+      if (ok) score++;
+      log.push({i:it.id, ok:ok?1:0, l:it.q.slice(0,90)});
+      if (!ok) review.push({q:it.q, right:answerText, why:it.worked.join(" ")});
+      inp.disabled = true; $$("[data-u]").forEach(function(x){ x.disabled = true; });
+      var fb = $("#fb"); fb.className = "fb" + (ok ? "" : " bad");
+      fb.innerHTML = '<strong>'+(ok ? (tries === 1 ? "Correct first time." : "Correct on the second go.") : "The answer is "+esc(answerText)+".")+'</strong>' +
+        '<ol>'+it.worked.map(function(w){ return '<li>'+esc(w)+'</li>'; }).join("")+'</ol>';
+      $("#dock").innerHTML = '<button class="btn amber block" id="next">'+(i+1 < items.length ? "Next question" : "See my score")+'</button>';
+      $("#next").onclick = function(){ i++; show(); };
+      say(ok ? "Correct." : "The answer is " + answerText);
+    }
+    $("#chk").onclick = function(){
+      var v = parseNum(inp.value), f = $("#fb");
+      if (v === null) { f.className = "fb info"; f.innerHTML = "<strong>Type a number first.</strong>"; return; }
+      if (unit === null) { f.className = "fb info"; f.innerHTML = "<strong>Pick a unit as well.</strong>"; return; }
+      tries++;
+      var numOk = Math.abs(v - it.raw) <= Math.max(it.tol, Math.abs(it.answer - it.raw) + 0.001), unitOk = unit === it.unit;
+      if (numOk && unitOk) return done(true);
+      if (tries === 1) {
+        f.className = "fb info";
+        f.innerHTML = "<strong>" + (!numOk && !unitOk ? "Not right, and the unit is wrong too." : !numOk ? "The number is not right." : "The number is right, but the unit is not.") + "</strong>Have one more go. Check your conversions first.";
+        if (!numOk) inp.select(); say("Not quite. Have one more go.");
+      } else done(false);
+    };
+    setTimeout(function(){ try { inp.focus(); } catch(e) {} }, 60);
+  }
+  show();
+}
+
+/* ---------- connecting wall: sixteen tiles, four groups of four, three wrong guesses allowed ---------- */
+function runWall(key, wall){
+  var tiles = shuffle([].concat.apply([], wall.groups.map(function(gr, gi){ return gr.tiles.map(function(t){ return {t:t, g:gi}; }); })));
+  var sel = [], solved = [], lives = 3, hints = 0, found = 0, started = Date.now(), log = [], msg = "", over = false, first = true;
+  function draw(){
+    var grid = solved.map(function(gi, k){ var gr = wall.groups[gi];
+      return '<div class="wsolved w'+k+'"><b>'+esc(gr.link)+'</b><span>'+esc(gr.tiles.join(", "))+'</span></div>'; }).join("") +
+      '<div class="wgrid">' + tiles.map(function(t, k){ return '<button class="wtile" data-w="'+k+'" aria-pressed="'+(sel.indexOf(k) >= 0)+'"'+(over?' disabled':'')+'>'+esc(t.t)+'</button>'; }).join("") + '</div>';
+    screen(gameHeader(TITLE[key], solved.length, 4) + '<div class="wrap"><div class="card">' +
+      '<div class="qno">'+esc(wall.title)+'</div><p class="qtext">Find four groups of four</p>' +
+      '<p class="qprompt">Pick four tiles that share a link. The wall checks them when you pick the fourth. Wrong guesses left: <b style="color:var(--head)">'+lives+'</b></p>' +
+      grid + '<div id="fb" role="status">'+msg+'</div></div><div class="dock" id="dock"></div></div>', {game:true, keep:!first});
+    first = false;
+    $$(".wtile").forEach(function(b){ b.onclick = function(){ tap(+b.dataset.w); }; });
+    var dock = $("#dock");
+    if (over || solved.length === 4) {
+      dock.innerHTML = '<button class="btn amber block" id="next">See my score</button>';
+      $("#next").onclick = function(){
+        var review = wall.groups.map(function(gr, gi){ return gr; }).filter(function(gr, gi){ return !log.some(function(l){ return l.g === gi && l.ok; }); })
+          .map(function(gr){ return {q:gr.tiles.join(", "), right:gr.link, why:""}; });
+        finishGame(key, found, 4, wall.groups.map(function(gr, gi){ var hit = log.some(function(l){ return l.g === gi && l.ok; }); return {i:"W"+(gi+1), ok:hit?1:0, l:gr.link}; }),
+          started, review, {round:wall.title + (hints ? ", " + hints + " hint" + (hints > 1 ? "s" : "") + " used" : "")});
+      };
+    } else {
+      dock.innerHTML = '<div class="row"><button class="btn ghost" id="clr">Clear my picks</button><button class="btn ghost" id="hint">Give me a hint</button></div>';
+      $("#clr").onclick = function(){ sel = []; msg = ""; draw(); };
+      $("#hint").onclick = function(){
+        var open = wall.groups.map(function(_, gi){ return gi; }).filter(function(gi){ return solved.indexOf(gi) < 0; });
+        hints++; msg = '<div class="fb info"><strong>Hint</strong>One link is: '+esc(wall.groups[open[0]].link.toLowerCase())+'.</div>'; draw();
+      };
+    }
+  }
+  function tap(k){
+    if (over) return;
+    var at = sel.indexOf(k); if (at >= 0) sel.splice(at, 1); else if (sel.length < 4) sel.push(k);
+    msg = "";
+    if (sel.length === 4) {
+      var gi = tiles[sel[0]].g, same = sel.every(function(x){ return tiles[x].g === gi; });
+      if (same) {
+        solved.push(gi); found++; log.push({g:gi, ok:1});
+        tiles = tiles.filter(function(t){ return t.g !== gi; });
+        msg = '<div class="fb"><strong>Group found.</strong>'+esc(wall.groups[gi].link)+'.</div>';
+        if (solved.length === 3) { var lastG = tiles[0].g; solved.push(lastG); found++; log.push({g:lastG, ok:1}); tiles = [];
+          msg = '<div class="fb"><strong>Wall complete.</strong>The last four made their own group: '+esc(wall.groups[lastG].link)+'.</div>'; }
+        say("Group found.");
+      } else {
+        lives--;
+        if (lives <= 0) {
+          over = true;
+          wall.groups.forEach(function(_, g){ if (solved.indexOf(g) < 0) solved.push(g); }); tiles = [];
+          msg = '<div class="fb bad"><strong>No wrong guesses left.</strong>The groups you did not find are shown above.</div>';
+        } else msg = '<div class="fb bad"><strong>Not a group.</strong>Those four do not share one link. '+lives+' wrong guess'+(lives>1?"es":"")+' left.</div>';
+        say(over ? "No wrong guesses left." : "Not a group.");
+      }
+      sel = [];
+    }
+    draw();
+  }
+  draw();
+}
+
+/* ---------- exit ticket and check-ins ---------- */
+function ragBlock(prefix, lines){
+  return lines.map(function(l,k){ return '<div class="q"><p id="'+prefix+k+'l" style="font-weight:400;color:var(--ink)">'+(k+1)+'. '+esc(l)+'</p>' +
+    '<div class="rag" role="group" aria-labelledby="'+prefix+k+'l">' +
+    '<button class="r" data-rag="'+prefix+k+'" data-v="R" aria-pressed="false">Not yet</button><button class="a" data-rag="'+prefix+k+'" data-v="A" aria-pressed="false">Nearly</button><button class="g" data-rag="'+prefix+k+'" data-v="G" aria-pressed="false">Got it</button></div></div>'; }).join("");
+}
+function wireRag(){ $$("[data-rag]").forEach(function(b){ b.onclick = function(){ $$('[data-rag="'+b.dataset.rag+'"]').forEach(function(x){ x.setAttribute("aria-pressed", String(x === b)); }); }; }); }
+function readRag(prefix, n){ var out = ""; for (var k=0;k<n;k++){ var on = $('[data-rag="'+prefix+k+'"][aria-pressed="true"]'); out += on ? on.dataset.v : "-"; } return out; }
+function doneScreen(key, title, score, max, heading, body, detail){
+  var p = S.prog; p.raw[key] = [score, max]; p.best[key] = Math.round(100*score/max); p.plays[key] = (p.plays[key]||0) + 1; p.last[key] = new Date().toISOString();
+  p.done[key] = true; p.xp += 30; var t = todayKey(); if (p.days.indexOf(t) < 0) p.days.push(t); saveProg();
+  screen(gameHeader(title, 0, 0) + '<div class="wrap"><div class="card stack"><h2 style="margin:0">'+heading+'</h2>'+body+'</div>' +
+    sendPanel(title, score, max, detail) + '<div class="dock"><button class="btn amber block" id="hub">Back to the games</button></div></div>', {game:true, done:true});
+  wireSend(title, score, max);
+  $("#hub").onclick = function(){ home(); };
+}
+function runExit(){
+  var E = UNIT.exit, n = E.mcq.length;
+  function radios(k, q){ return '<fieldset class="q"><legend>'+(k+2)+'. '+esc(q.q)+'</legend>'+q.opts.map(function(o,j){ return '<label class="check"><input type="radio" name="m'+k+'" value="'+j+'"><span>'+esc(o)+'</span></label>'; }).join("")+'</fieldset>'; }
+  screen(gameHeader(TITLE.exit, 0, 0) + '<div class="wrap"><div class="card">' +
+    '<p style="margin:0">Five minutes, on your own. This is for feedback, not a mark.</p>' +
+    '<div class="q"><label for="q1">1. '+esc(E.q1)+'</label><textarea id="q1" class="textin" maxlength="400"></textarea></div>' +
+    E.mcq.map(function(q, k){ return radios(k, q); }).join("") +
+    '<div class="q"><label for="qw">'+(n+2)+'. '+esc(E.why)+'</label><textarea id="qw" class="textin" maxlength="300" style="min-height:70px"></textarea></div>' +
+    '<h3 style="margin:22px 0 4px">Can you do all '+E.rag.length+'? Be honest.</h3>' + ragBlock("x", E.rag) +
+    '<div class="q"><label for="fz">Anything still fuzzy? (optional)</label><textarea id="fz" class="textin" maxlength="300" style="min-height:70px"></textarea></div>' +
+    '<p id="err" class="small" role="alert" style="color:var(--red)"></p></div>' +
+    '<div class="dock"><button class="btn amber block" id="send2">Hand it in</button></div></div>', {game:true});
+  wireRag();
+  $("#send2").onclick = function(){
+    var q1 = $("#q1").value.trim(), picks = E.mcq.map(function(_, k){ return $('input[name="m'+k+'"]:checked'); }), rag = readRag("x", E.rag.length);
+    if (!q1 || picks.some(function(p){ return !p; }) || rag.indexOf("-") >= 0) { $("#err").textContent = "Answer questions 1 to "+(n+1)+" and rate every line before handing in."; return; }
+    var oks = picks.map(function(p, k){ return +p.value === E.mcq[k].ans; }), score = oks.filter(Boolean).length;
+    var lowest = E.rag[rag.indexOf("R") >= 0 ? rag.indexOf("R") : (rag.indexOf("A") >= 0 ? rag.indexOf("A") : 0)];
+    var extra = {q1:q1, why:$("#qw").value.trim(), rag:rag, fuzzy:$("#fz").value.trim()};
+    E.mcq.forEach(function(q, k){ extra["q"+(k+2)] = q.opts[+picks[k].value]; });
+    logEvent("exit", TITLE.exit, {score:score, max:n, extra:extra, items:E.mcq.map(function(q, k){ return {i:"X"+(k+2), ok:oks[k]?1:0, l:q.q.slice(0,90)}; })});
+    var body = '<p style="margin:0">Thank you. Your tutor will read this before the next lesson.</p><ul class="review">' +
+      E.mcq.map(function(q, k){ return '<li>'+(oks[k] ? '<b style="color:var(--green)">Right:</b> ' : '<b style="color:var(--red)">Check this:</b> ')+esc(q.fb)+'</li>'; }).join("") + '</ul>' +
+      '<div class="panel amber"><p><b>Your first thing to work on:</b> '+esc(lowest)+'</p></div>';
+    var detail = "Q1: " + q1 + " | Reason: " + extra.why + " | Lines: " + rag + (extra.fuzzy ? " | Fuzzy: " + extra.fuzzy : "");
+    doneScreen("exit", TITLE.exit, score, n, "Handed in", body, detail);
+  };
+}
+function runCheckin(part, key){
+  var C = UNIT.checkin[part];
+  screen(gameHeader(C.title, 0, 0) + '<div class="wrap"><div class="card"><p style="margin:0">Rate each line honestly. It tells your tutor what to go over again.</p>' +
+    ragBlock("c", C.lines) + '<p id="err" class="small" role="alert" style="color:var(--red)"></p></div>' +
+    '<div class="dock"><button class="btn amber block" id="send2">Send my check-in</button></div></div>', {game:true});
+  wireRag();
+  $("#send2").onclick = function(){
+    var rag = readRag("c", C.lines.length);
+    if (rag.indexOf("-") >= 0) { $("#err").textContent = "Rate every line first."; return; }
+    var g = rag.split("").filter(function(x){ return x === "G"; }).length;
+    logEvent("checkin", C.title, {score:g, max:C.lines.length, extra:{rag:rag, part:part}});
+    var weak = C.lines.filter(function(_,k){ return rag[k] !== "G"; });
+    var body = '<p style="margin:0">You rated '+g+' of '+C.lines.length+' lines as got it.</p>' +
+      (weak.length ? '<p style="margin:0">Go over these next:</p><ul class="review">'+weak.map(function(l){ return '<li>'+esc(l)+'</li>'; }).join("")+'</ul>' : '<p style="margin:0">Everything rated got it. Try the games to prove it.</p>');
+    doneScreen(key, C.title, g, C.lines.length, "Sent", body, "Lines: " + rag);
+  };
+}
+
+/* ---------- start ---------- */
+(function init(){
+  applyPrefs();
+  var labels = {games:["games","Games"], record:["record","My record"], help:["help","Help"]};
+  $$("#tabs button").forEach(function(b){ var l = labels[b.dataset.tab]; b.innerHTML = icon(l[0]) + '<span>'+l[1]+'</span>';
+    b.onclick = function(){ if (b.dataset.tab === "games") home(); else if (b.dataset.tab === "record") record(); else help(); }; });
+  var qc = ""; try { qc = (new URLSearchParams(location.search).get("c") || "").trim().toUpperCase(); } catch(e) {}
+  if (/^[A-Z0-9]{4}$/.test(qc)) {
+    try { history.replaceState(null, "", location.pathname + location.hash); } catch(e) {}
+    if (!S.me || S.me.code !== qc) {
+      var hit = CLASS.filter(function(c){ return c.code === qc; })[0];
+      S.me = {code:qc, name: hit ? hit.name : qc}; rememberMe(S.me); logEvent("open","hub");
+    }
+  }
+  if (S.me) { loadProg(); home(); loadServer().then(function(){ if (!inGame && S.tab === "games" && S.me) home(); }); Sync.flush(); }
+  else { loadServer().then(function(){ signIn(); }); signIn(); }
+})();
+
+</script>
+<script>
+"use strict";
+/* This hub's own names for the exit ticket and the cards, so the tracker can tell them apart from the other Unit 2 hub. */
+TITLE.exit = "Exit ticket, 2.2 and 2.3";
+TITLE.flash = "Check yourself cards";
+</script>
+</body>
+</html>
