@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#16335B">
+<meta name="robots" content="noindex, nofollow">
+<title>Unit 2 lesson feedback</title>
+<style>
+:root{--navy:#16335B;--navy2:#22497D;--amber:#E8A33D;--green:#0B6E4F;--red:#B3261E;
+--ink:#1F2F4D;--head:#16335B;--muted:#5A6472;--line:#D8E2EE;--bg:#F4F7FB;--card:#FFFFFF;--tint:#EEF3FA;
+--goodbg:#E7F4EE;--ambbg:#FFF6E5;--btn:#16335B;--btnh:#22497D;--sel:#16335B;--selink:#FFFFFF;--r:14px;
+--shadow:0 1px 2px rgba(22,51,91,.06),0 3px 10px rgba(22,51,91,.05)}
+@media (prefers-color-scheme:dark){:root{--bg:#0E1A2B;--card:#16263D;--ink:#E4ECF7;--head:#D3E3F8;--muted:#A6B4C7;--line:#2B3F5E;--tint:#1C3050;
+--goodbg:#123A2D;--ambbg:#3A2E14;--btn:#2F5E9C;--btnh:#3A6DB0;--sel:#E8A33D;--selink:#241802;--green:#63D3A8;--red:#FF8F86;--shadow:none}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html,body{margin:0;padding:0;overflow-x:hidden}
+body{background:var(--bg);color:var(--ink);font-family:Arial,"Liberation Sans",Helvetica,sans-serif;font-size:17px;line-height:1.5;-webkit-tap-highlight-color:transparent}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+h1,h2,h3{line-height:1.25}
+.hdr{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;padding:calc(18px + env(safe-area-inset-top)) 18px 16px}
+.hdr .kick{color:var(--amber);font-weight:700;font-size:.8em}
+.hdr h1{margin:3px 0 2px;font-size:1.5em}
+.hdr .sub{color:#C3D3EA;font-size:.86em}
+.rule{height:4px;background:var(--amber)}
+.pbar{height:6px;background:var(--line);position:sticky;top:0;z-index:6}.pbar i{display:block;height:100%;width:0;background:var(--amber);transition:width .3s}
+.wrap{max-width:720px;margin:0 auto;padding:16px 16px calc(40px + env(safe-area-inset-bottom))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:var(--shadow);margin-top:12px}
+.card h2{margin:0 0 2px;font-size:1.05em;color:var(--head)}
+.card .hint{margin:0 0 12px;color:var(--muted);font-size:.88em}
+.num{display:inline-flex;width:26px;height:26px;border-radius:50%;background:var(--tint);color:var(--head);font-size:.8em;font-weight:700;align-items:center;justify-content:center;margin-right:6px;vertical-align:2px}
+.panel{border-radius:var(--r);padding:12px 16px;background:var(--ambbg);border-left:5px solid var(--amber);margin-top:12px}
+.panel p{margin:.3em 0}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{flex:1 1 120px;min-height:50px;padding:8px 12px;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--head);font-weight:700;text-align:center;line-height:1.2}
+.opt:hover{border-color:var(--amber)}
+.opt[aria-pressed="true"]{background:var(--sel);border-color:var(--sel);color:var(--selink)}
+.opt .em{display:block;font-size:1.7em;line-height:1.1;margin-bottom:2px}
+.opts.faces .opt{flex:1 1 90px}
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.scale .opt{flex:none;min-height:48px;padding:6px 0}
+.ends{display:flex;justify-content:space-between;color:var(--muted);font-size:.8em;margin-top:4px}
+textarea,input[type=text]{width:100%;border:2px solid var(--line);border-radius:12px;background:var(--card);padding:10px 12px;resize:vertical}
+textarea{min-height:92px}
+textarea:focus,input:focus{border-color:var(--amber);outline:none}
+.count{text-align:right;color:var(--muted);font-size:.78em}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:54px;padding:0 18px;border-radius:12px;border:2px solid var(--btn);background:var(--btn);color:#fff;font-weight:700;text-decoration:none;width:100%}
+.btn:hover{background:var(--btnh);border-color:var(--btnh)}
+.btn.amber{background:var(--amber);border-color:var(--amber);color:#241802}
+.btn.ghost{background:transparent;color:var(--head);border-color:var(--line)}
+.btn[disabled]{opacity:.45;cursor:default}
+.stack>*+*{margin-top:10px}
+.err{color:var(--red);font-weight:700;font-size:.9em;margin-top:8px;min-height:1em}
+.done{text-align:center}
+.done .big{font-size:3em;line-height:1}
+.muted{color:var(--muted)}.small{font-size:.86em}
+.foot{margin-top:18px;text-align:center}
+.foot a{color:var(--head);font-weight:700}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="kick">Engineering Common Core · Unit 2</div>
+  <h1>How was the lesson?</h1>
+  <div class="sub">Two minutes. Be honest. It helps me make the next lesson better.</div>
+</header>
+<div class="rule"></div>
+<div class="pbar" aria-hidden="true"><i id="bar"></i></div>
+
+<main class="wrap">
+<form id="fb" novalidate>
+
+  <div class="panel small">
+    <p><b>You do not have to give your name.</b> There are no wrong answers and nothing here affects your marks.</p>
+  </div>
+
+  <section class="card" data-q="lesson">
+    <h2><span class="num">1</span>Which lesson are you giving feedback on?</h2>
+    <p class="hint">Pick one.</p>
+    <div class="opts" role="group" aria-label="Lesson">
+      <button type="button" class="opt" data-v="2.1 Historical engineering achievements">2.1 History of engineering</button>
+      <button type="button" class="opt" data-v="2.2 Significant technological advances">2.2 Technological advances</button>
+      <button type="button" class="opt" data-v="2.3 Innovation and emerging trends">2.3 Innovation and emerging trends</button>
+      <button type="button" class="opt" data-v="Unit 2 overall">Unit 2 overall</button>
+    </div>
+  </section>
+
+  <section class="card" data-q="feel">
+    <h2><span class="num">2</span>How did you feel in the lesson?</h2>
+    <p class="hint">Pick the face closest to how you felt.</p>
+    <div class="opts faces" role="group" aria-label="How you felt">
+      <button type="button" class="opt" data-v="5 Great"><span class="em" aria-hidden="true">😀</span>Great</button>
+      <button type="button" class="opt" data-v="4 Good"><span class="em" aria-hidden="true">🙂</span>Good</button>
+      <button type="button" class="opt" data-v="3 OK"><span class="em" aria-hidden="true">😐</span>OK</button>
+      <button type="button" class="opt" data-v="2 Not great"><span class="em" aria-hidden="true">😕</span>Not great</button>
+      <button type="button" class="opt" data-v="1 Bad"><span class="em" aria-hidden="true">😞</span>Bad</button>
+    </div>
+  </section>
+
+  <section class="card" data-q="understand">
+    <h2><span class="num">3</span>How well did you understand the lesson?</h2>
+    <div class="scale" role="group" aria-label="Understanding, 1 to 5">
+      <button type="button" class="opt" data-v="1">1</button><button type="button" class="opt" data-v="2">2</button><button type="button" class="opt" data-v="3">3</button><button type="button" class="opt" data-v="4">4</button><button type="button" class="opt" data-v="5">5</button>
+    </div>
+    <div class="ends"><span>Lost</span><span>Fully understood</span></div>
+  </section>
+
+  <section class="card" data-q="pace">
+    <h2><span class="num">4</span>What was the pace like?</h2>
+    <div class="opts" role="group" aria-label="Pace">
+      <button type="button" class="opt" data-v="Too slow">Too slow</button>
+      <button type="button" class="opt" data-v="About right">About right</button>
+      <button type="button" class="opt" data-v="Too fast">Too fast</button>
+    </div>
+  </section>
+
+  <section class="card" data-q="interest">
+    <h2><span class="num">5</span>How interesting was the lesson?</h2>
+    <div class="scale" role="group" aria-label="Interest, 1 to 5">
+      <button type="button" class="opt" data-v="1">1</button><button type="button" class="opt" data-v="2">2</button><button type="button" class="opt" data-v="3">3</button><button type="button" class="opt" data-v="4">4</button><button type="button" class="opt" data-v="5">5</button>
+    </div>
+    <div class="ends"><span>Boring</span><span>Really interesting</span></div>
+  </section>
+
+  <section class="card" data-q="confidence">
+    <h2><span class="num">6</span>How confident are you that you could answer an exam question on this topic?</h2>
+    <div class="scale" role="group" aria-label="Confidence, 1 to 5">
+      <button type="button" class="opt" data-v="1">1</button><button type="button" class="opt" data-v="2">2</button><button type="button" class="opt" data-v="3">3</button><button type="button" class="opt" data-v="4">4</button><button type="button" class="opt" data-v="5">5</button>
+    </div>
+    <div class="ends"><span>Not at all</span><span>Very confident</span></div>
+  </section>
+
+  <section class="card" data-q="activity" data-multi="1">
+    <h2><span class="num">7</span>Which parts helped you learn most?</h2>
+    <p class="hint">Pick as many as you like.</p>
+    <div class="opts" role="group" aria-label="Helpful parts">
+      <button type="button" class="opt" data-v="Tutor explaining">Tutor explaining</button>
+      <button type="button" class="opt" data-v="Slides and videos">Slides and videos</button>
+      <button type="button" class="opt" data-v="Practice hub games">Practice hub games</button>
+      <button type="button" class="opt" data-v="Group or pair work">Group or pair work</button>
+      <button type="button" class="opt" data-v="Class discussion">Class discussion</button>
+      <button type="button" class="opt" data-v="Calculations and worksheets">Calculations and worksheets</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="num">8</span>What was the best thing about the lesson?</h2>
+    <textarea id="best" maxlength="400" placeholder="For example: the robot arm example made it click for me"></textarea>
+    <div class="count" data-for="best"></div>
+  </section>
+
+  <section class="card">
+    <h2><span class="num">9</span>What could I do to improve the lesson?</h2>
+    <p class="hint">Tell me straight. This is the most useful answer for me.</p>
+    <textarea id="improve" maxlength="400" placeholder="For example: more time on the calculations, fewer slides"></textarea>
+    <div class="count" data-for="improve"></div>
+  </section>
+
+  <section class="card">
+    <h2><span class="num">10</span>Is there anything you are stuck on, or anything else you want me to know?</h2>
+    <textarea id="other" maxlength="400" placeholder="Optional"></textarea>
+    <div class="count" data-for="other"></div>
+  </section>
+
+  <section class="card">
+    <h2><span class="num">11</span>Your name <span class="muted small">(optional)</span></h2>
+    <p class="hint">Leave this empty to stay anonymous.</p>
+    <input type="text" id="name" maxlength="60" autocomplete="off" placeholder="Leave empty to stay anonymous">
+  </section>
+
+  <div class="card stack">
+    <button type="submit" class="btn amber" id="send">Send my feedback</button>
+    <div class="err" id="err" role="alert"></div>
+    <p class="small muted" id="how"></p>
+  </div>
+</form>
+
+<section id="thanks" class="card done stack" hidden tabindex="-1">
+  <div class="big" aria-hidden="true">🙌</div>
+  <h2>Thank you!</h2>
+  <p id="thanksMsg">A Microsoft Form has opened with your answers filled in. <b>Press Submit on the form</b> to send it.</p>
+  <a class="btn" id="reopen" href="#" target="_blank" rel="noopener">Open the form again</a>
+  <button type="button" class="btn ghost" id="copy">Copy my feedback instead</button>
+  <button type="button" class="btn ghost" id="again">Give feedback on another lesson</button>
+</section>
+
+<p class="foot small"><a href="unit-2-advances-and-innovation.html">Back to the Unit 2 practice hub</a></p>
+</main>
+
+<script>
+"use strict";
+/* ==========================================================================
+   TUTOR SETTING. This is the only line you need to edit.
+
+   FEEDBACK_FORM_PREFILL
+   The pre-filled link from your Unit 2 feedback Microsoft Form. In the form
+   press the three dots (...) > Get pre-filled URL, type each marker below
+   into its matching question, then press Get pre-filled link and paste the
+   whole link between the quotes. Markers, one per question, in this order:
+
+     LESSONHERE  FEELHERE  UNDERSTANDHERE  PACEHERE  INTERESTHERE
+     CONFIDENCEHERE  ACTIVITYHERE  BESTHERE  IMPROVEHERE  OTHERHERE  NAMEHERE
+
+   Leave it empty and learners copy their feedback instead of sending it.  */
+
+var FEEDBACK_FORM_PREFILL = "";
+
+/* ======================================================================== */
+
+var ORDER = ["lesson","feel","understand","pace","interest","confidence","activity"];
+var REQUIRED = ["lesson","feel","understand","pace","interest","confidence"];
+var A = {};
+
+/* pre-select a lesson from the link, e.g. feedback.html?lesson=2.2 */
+(function(){
+  var m = /[?&]lesson=([^&]+)/.exec(location.search); if (!m) return;
+  var want = decodeURIComponent(m[1]);
+  var b = Array.prototype.find.call(document.querySelectorAll('[data-q="lesson"] .opt'), function(x){ return x.dataset.v.indexOf(want) === 0; });
+  if (b) { b.setAttribute("aria-pressed","true"); A.lesson = b.dataset.v; }
+})();
+
+document.querySelectorAll("[data-q]").forEach(function(sec){
+  var key = sec.dataset.q, multi = !!sec.dataset.multi;
+  sec.querySelectorAll(".opt").forEach(function(b){
+    if (!b.hasAttribute("aria-pressed")) b.setAttribute("aria-pressed","false");
+    b.addEventListener("click", function(){
+      if (multi) {
+        b.setAttribute("aria-pressed", b.getAttribute("aria-pressed")==="true" ? "false" : "true");
+        A[key] = Array.prototype.filter.call(sec.querySelectorAll(".opt"), function(x){ return x.getAttribute("aria-pressed")==="true"; })
+                 .map(function(x){ return x.dataset.v; }).join("; ");
+      } else {
+        sec.querySelectorAll(".opt").forEach(function(x){ x.setAttribute("aria-pressed", x===b ? "true" : "false"); });
+        A[key] = b.dataset.v;
+      }
+      progress();
+    });
+  });
+});
+
+function val(id){ return document.getElementById(id).value.trim(); }
+document.querySelectorAll("textarea").forEach(function(t){
+  var c = document.querySelector('[data-for="'+t.id+'"]');
+  function upd(){ c.textContent = t.value.length + " / " + t.maxLength; progress(); }
+  t.addEventListener("input", upd); upd();
+});
+
+function progress(){
+  var n = REQUIRED.filter(function(k){ return A[k]; }).length + (val("improve") ? 1 : 0);
+  document.getElementById("bar").style.width = Math.round(100 * n / (REQUIRED.length + 1)) + "%";
+}
+
+document.getElementById("how").textContent = FEEDBACK_FORM_PREFILL
+  ? "Pressing Send opens a Microsoft Form with your answers filled in. Then press Submit on the form."
+  : "Your tutor has not linked this page to a form yet. Press Send, then copy your feedback and give it to your tutor.";
+
+function answers(){
+  return {
+    LESSONHERE: A.lesson || "", FEELHERE: A.feel || "", UNDERSTANDHERE: A.understand || "", PACEHERE: A.pace || "",
+    INTERESTHERE: A.interest || "", CONFIDENCEHERE: A.confidence || "", ACTIVITYHERE: A.activity || "",
+    BESTHERE: val("best"), IMPROVEHERE: val("improve"), OTHERHERE: val("other"), NAMEHERE: val("name") || "Anonymous"
+  };
+}
+function formLink(a){
+  var u = FEEDBACK_FORM_PREFILL;
+  Object.keys(a).forEach(function(k){ u = u.split(k).join(encodeURIComponent(a[k])); });
+  return u;
+}
+function plainText(a){
+  return ["Unit 2 lesson feedback",
+    "Lesson: " + a.LESSONHERE, "Feeling: " + a.FEELHERE, "Understanding (1-5): " + a.UNDERSTANDHERE,
+    "Pace: " + a.PACEHERE, "Interest (1-5): " + a.INTERESTHERE, "Confidence (1-5): " + a.CONFIDENCEHERE,
+    "Most helpful: " + a.ACTIVITYHERE, "Best thing: " + a.BESTHERE, "Improve: " + a.IMPROVEHERE,
+    "Anything else: " + a.OTHERHERE, "Name: " + a.NAMEHERE].join("\n");
+}
+
+var last = null;
+document.getElementById("fb").addEventListener("submit", function(e){
+  e.preventDefault();
+  var err = document.getElementById("err");
+  var missing = REQUIRED.filter(function(k){ return !A[k]; });
+  if (missing.length) {
+    err.textContent = "Please answer question " + (ORDER.indexOf(missing[0]) + 1) + " first.";
+    document.querySelector('[data-q="'+missing[0]+'"]').scrollIntoView({behavior:"smooth", block:"center"});
+    return;
+  }
+  if (!val("improve")) {
+    err.textContent = "Please answer question 9. Even one or two words helps.";
+    document.getElementById("improve").focus(); return;
+  }
+  err.textContent = "";
+  last = answers();
+  var reopen = document.getElementById("reopen");
+  if (FEEDBACK_FORM_PREFILL) {
+    var url = formLink(last);
+    reopen.href = url; reopen.hidden = false;
+    window.open(url, "_blank", "noopener");
+  } else {
+    reopen.hidden = true;
+    document.getElementById("thanksMsg").textContent = "Press Copy my feedback, then paste it into Teams or an email to your tutor.";
+  }
+  document.getElementById("fb").hidden = true;
+  var t = document.getElementById("thanks"); t.hidden = false; t.focus(); window.scrollTo(0,0);
+});
+
+document.getElementById("copy").addEventListener("click", function(){
+  var b = this, text = plainText(last || answers());
+  function ok(){ b.textContent = "Copied. Paste it into Teams or an email to your tutor."; }
+  function fallback(){ var t=document.createElement("textarea"); t.value=text; t.style.position="fixed"; t.style.opacity="0";
+    document.body.appendChild(t); t.select(); try{ document.execCommand("copy"); }catch(e){} t.remove(); ok(); }
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(ok, fallback); else fallback();
+});
+document.getElementById("again").addEventListener("click", function(){ location.href = location.pathname; });
+progress();
+</script>
+</body>
+</html>
