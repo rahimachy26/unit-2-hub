@@ -854,7 +854,8 @@ var ICON = {
   close:'<path d="M6 6l12 12M18 6L6 18"/>',
   send:'<path d="M4 12l16-8-6 16-3-7z"/>',
   copy:'<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/>',
-  chev:'<path d="M9 5l7 7-7 7"/>'
+  chev:'<path d="M9 5l7 7-7 7"/>',
+  chat:'<path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/>'
 };
 function icon(k){ return '<svg class="i" viewBox="0 0 24 24" aria-hidden="true">'+(ICON[k]||"")+'</svg>'; }
 
@@ -1151,10 +1152,11 @@ function home(){
       row("checkin1", "check", "Part 1 check-in", UNIT.checkin.p1.blurb, done.checkin1 ? '<span class="pill">Sent</span>' : '') +
       row("checkin2", "check", "Part 2 check-in", UNIT.checkin.p2.blurb, done.checkin2 ? '<span class="pill">Sent</span>' : '') +
       row("flash", "flash", "Key word cards", UNIT.flashBlurb) +
+      row("feedback", "chat", "Lesson feedback", "Tell your tutor how the lesson went and what would make it better. You can stay anonymous.") +
     '</div><p class="foot">This is formative. Nothing here is marked or graded. <span data-sync>'+esc(syncText())+'</span></p></div>', {tab:"games"});
   $$(".tile").forEach(function(t){ t.onclick = function(){ startGame(t.dataset.game); }; });
   $$("[data-go]").forEach(function(b){ b.onclick = function(){ var g=b.dataset.go;
-    if (g==="exit") runExit(); else if (g==="checkin1") runCheckin("p1","checkin1"); else if (g==="checkin2") runCheckin("p2","checkin2"); else startGame("flash"); }; });
+    if (g==="exit") runExit(); else if (g==="checkin1") runCheckin("p1","checkin1"); else if (g==="checkin2") runCheckin("p2","checkin2"); else if (g==="feedback") location.href = "feedback.html"; else startGame("flash"); }; });
   var rc = $('[data-act="refcard"]'); if (rc) rc.onclick = function(){ openRefCard(); };
 }
 
